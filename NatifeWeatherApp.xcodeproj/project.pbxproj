@@ -25,6 +25,7 @@
 		BCB30659299949880088ADBC /* WeatherSecondaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB30658299949880088ADBC /* WeatherSecondaryLabel.swift */; };
 		BCB3065B29994A410088ADBC /* WeatherImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB3065A29994A410088ADBC /* WeatherImageView.swift */; };
 		BCB30661299950E10088ADBC /* DailyWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB30660299950E10088ADBC /* DailyWeatherViewController.swift */; };
+		BCB306632999548A0088ADBC /* DailyIndexesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB306622999548A0088ADBC /* DailyIndexesView.swift */; };
 		DA2BE0DEDBE5E5506B392030 /* Pods_NatifeWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5882D76B1F5D2441127BB1B /* Pods_NatifeWeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		BCB30658299949880088ADBC /* WeatherSecondaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSecondaryLabel.swift; sourceTree = "<group>"; };
 		BCB3065A29994A410088ADBC /* WeatherImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImageView.swift; sourceTree = "<group>"; };
 		BCB30660299950E10088ADBC /* DailyWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherViewController.swift; sourceTree = "<group>"; };
+		BCB306622999548A0088ADBC /* DailyIndexesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyIndexesView.swift; sourceTree = "<group>"; };
 		CB10C958D77849A9ACC74AD9 /* Pods-NatifeWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatifeWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-NatifeWeatherApp/Pods-NatifeWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +169,7 @@
 				BCB3065229992F450088ADBC /* ChildViewControllers */,
 				BCB3065C29994FE00088ADBC /* UILabels */,
 				BCB3065D29994FFA0088ADBC /* UIImageViews */,
+				BCB306622999548A0088ADBC /* DailyIndexesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				BCB3063F2997C2E70088ADBC /* WeatherPresenter.swift in Sources */,
 				BCB3062B2997BE550088ADBC /* WeatherMainScreen.swift in Sources */,
 				BCB3064929991E2F0088ADBC /* UIView+Ext.swift in Sources */,
+				BCB306632999548A0088ADBC /* DailyIndexesView.swift in Sources */,
 				BCB306272997BE550088ADBC /* AppDelegate.swift in Sources */,
 				BCB306292997BE550088ADBC /* SceneDelegate.swift in Sources */,
 				BCB306452997C51A0088ADBC /* NetworkManager.swift in Sources */,

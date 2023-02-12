@@ -19,6 +19,9 @@ enum SFSymbols {
     static let location = UIImage(systemName: "mappin.and.ellipse")
     static let map = UIImage(systemName: "map.circle")
     static let sun = UIImage(systemName: "cloud.sun")
+    static let temperature = UIImage(systemName: "thermometer.medium")
+    static let humidity = UIImage(systemName: "humidity")
+    static let wind = UIImage(systemName: "wind")
 }
 
 /// forecast weather by location
