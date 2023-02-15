@@ -15,10 +15,11 @@ class DailyWeatherViewController: UIViewController {
     private let humidityContainer = UIView()
     private let windContainer = UIView()
 
-    private let dailyWeatherImageView = WeatherImageView(frame: .zero)
-    private let dailyTemperatureView = DailyIndexesView()
-    private let dailyHumidityView = DailyIndexesView()
-    private let dailyWindView = DailyIndexesView()
+    private let weatherImageView = WeatherImageView(frame: .zero)
+    
+    private let temperatureView = DailyIndexesView()
+    private let humidityView = DailyIndexesView()
+    private let windView = DailyIndexesView()
 
     init(weather: WeatherList) {
         super.init(nibName: nil, bundle: nil)
@@ -36,22 +37,21 @@ class DailyWeatherViewController: UIViewController {
     }
     
     private func configureUI() {
-        dailyWeatherImageView.setDailyWeatherImageView(view: view, imageView: dailyWeatherImageView)
+        weatherImageView.setWeatherImage(view: view, imageView: weatherImageView)
         
-        temperatureContainer.setDailyTemperatureContainerView(view: view, imageView: dailyWeatherImageView, container: temperatureContainer)
-        humidityContainer.setDailyHumidityContainerView(view: view, imageView: dailyWeatherImageView, container: humidityContainer)
-        windContainer.setDailyWindContainerView(view: view, imageView: dailyWeatherImageView, container: windContainer)
+        temperatureContainer.setTemperatureContainer(view: view, imageView: weatherImageView, container: temperatureContainer)
+        humidityContainer.setHumidityContainer(view: view, imageView: weatherImageView, container: humidityContainer)
+        windContainer.setWindContainer(view: view, imageView: weatherImageView, container: windContainer)
         
-        dailyTemperatureView.setDailyView(container: temperatureContainer, subview: dailyTemperatureView)
-        dailyHumidityView.setDailyView(container: temperatureContainer, subview: dailyHumidityView)
-        dailyTemperatureView.setDailyView(container: humidityContainer, subview: dailyTemperatureView)
-        
-        dailyWindView.setDailyView(container: windContainer, subview: dailyWindView)
+        temperatureView.setDailyView(container: temperatureContainer, subview: temperatureView)
+        humidityView.setDailyView(container: humidityContainer, subview: humidityView)
+        windView.setDailyView(container: windContainer, subview: windView)
+
     }
     
     private func updateUI() {
-        dailyTemperatureView.set(indexImage: .temperature, leftIndexText: "18 C/", rightIndexText: "24C")
-        dailyHumidityView.set(indexImage: .humidity, leftIndexText: "30 %")
-        dailyWindView.set(indexImage: .wind, leftIndexText: "30 m/s", rightIndexText: "↖︎")
+        temperatureView.set(indexImage: .temperature, leftIndexText: "18 C/", rightIndexText: "24C")
+        humidityView.set(indexImage: .humidity, leftIndexText: "30 %")
+        windView.set(indexImage: .wind, leftIndexText: "30 m/s", rightIndexText: "↖︎")
     }
 }

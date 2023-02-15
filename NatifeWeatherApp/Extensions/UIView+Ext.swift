@@ -108,7 +108,7 @@ extension UIView {
     
     // MARK: - DailyWeatherViewController Layout
     
-    func setDailyWeatherImageView(view: UIView, imageView: UIImageView) {
+    func setWeatherImage(view: UIView, imageView: UIImageView) {
         view.addSubview(imageView)
         
         imageView.snp.makeConstraints { make in
@@ -118,7 +118,7 @@ extension UIView {
         }
     }
     
-    func setDailyTemperatureContainerView(view: UIView, imageView: UIImageView , container: UIView) {
+    func setTemperatureContainer(view: UIView, imageView: UIImageView , container: UIView) {
         view.addSubview(container)
         
         container.snp.makeConstraints { make in
@@ -129,7 +129,7 @@ extension UIView {
         }
     }
     
-    func setDailyHumidityContainerView(view: UIView, imageView: UIImageView , container: UIView) {
+    func setHumidityContainer(view: UIView, imageView: UIImageView , container: UIView) {
         view.addSubview(container)
         
         container.snp.makeConstraints { make in
@@ -140,7 +140,7 @@ extension UIView {
         }
     }
     
-    func  setDailyWindContainerView(view: UIView, imageView: UIImageView , container: UIView) {
+    func  setWindContainer(view: UIView, imageView: UIImageView , container: UIView) {
         view.addSubview(container)
         
         container.snp.makeConstraints { make in
