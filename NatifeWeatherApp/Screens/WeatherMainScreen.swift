@@ -16,13 +16,13 @@ class WeatherMainScreen: UIViewController {
     // MARK: - Private properties
     private var weather: [WeatherList] = []
     
-    var scrollView = UIScrollView()
-    var contentView = UIView()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
-    var topNameViewContainer = UIView()
-    var dailyWeatherViewContainer = UIView()
-    var hourlyWeatherViewContainer = UIView()
-    var forecastWeatherViewContainer = UIView()
+    private let topNameViewContainer = UIView()
+    private let dailyWeatherViewContainer = UIView()
+    private let hourlyWeatherViewContainer = UIView()
+    private let forecastWeatherViewContainer = UIView()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

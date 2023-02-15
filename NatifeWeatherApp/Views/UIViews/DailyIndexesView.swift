@@ -14,6 +14,7 @@ class DailyIndexesView: UIView {
     private let dailyIndexesContainer = UIStackView()
     private let symbolImageView = UIImageView()
     private let labelContainerView = UIStackView()
+    private let paddingView = UIView()
     private let leftIndexLabel = WeatherSecondaryLabel(fontSize: 18)
     private let rightIndexLabel = WeatherSecondaryLabel(fontSize: 18)
 
@@ -29,10 +30,10 @@ class DailyIndexesView: UIView {
     private func configure() {
         dailyIndexesContainer.setDailyIndexesContainer(view: self, container: dailyIndexesContainer)
         dailyIndexesContainer.addAllSubbviews(symbolImageView, labelContainerView)
-        labelContainerView.setLabelContainerView(container: labelContainerView, leftLabel: leftIndexLabel, rightLabel: rightIndexLabel)
+        labelContainerView.setLabelContainerView(container: labelContainerView)
+        labelContainerView.addAllSubbviews(leftIndexLabel, rightIndexLabel, paddingView)
+
         symbolImageView.tintColor = .label
-        leftIndexLabel.tintColor = .label
-        rightIndexLabel.tintColor = .label
         symbolImageView.contentMode = .center
     }
     

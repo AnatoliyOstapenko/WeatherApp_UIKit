@@ -11,10 +11,10 @@ class TopNameViewController: UIViewController {
     
     private var weather: WeatherList?
     
-    var mapImageView = UIImageView()
-    var cityNameLabel = WeatherTitleLabel(textAligment: .left, fontSize: 28)
-    var currentDateLabel = WeatherSecondaryLabel(fontSize: 18)
-    var locationImageView = UIImageView()
+    private let mapImageView = UIImageView()
+    private let cityNameLabel = WeatherTitleLabel(textAligment: .left, fontSize: 28)
+    private let currentDateLabel = WeatherSecondaryLabel(fontSize: 18)
+    private let locationImageView = UIImageView()
     
     init(weather: WeatherList) {
         super.init(nibName: nil, bundle: nil)
