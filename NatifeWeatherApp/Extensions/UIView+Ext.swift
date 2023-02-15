@@ -142,17 +142,46 @@ extension UIView {
         }
     }
     
-    func setDailyRightContainer(view: UIView, container: UIStackView) {
+    func setDailyTemperatureContainerView(view: UIView, imageView: UIImageView , container: UIView) {
         view.addSubview(container)
-        container.axis = .vertical
-        container.distribution = .fillEqually
-        container.alignment = .leading
-        container.backgroundColor = .systemGray3
+        container.backgroundColor = .systemPink
         
         container.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.equalTo(view.snp.trailing).offset(-60)
-            make.height.width.equalTo(120)
+            make.top.equalToSuperview().offset(8)
+            make.trailing.equalTo(view.snp.trailing).offset(-10)
+            make.width.equalTo(180)
+            make.height.equalTo(30)
+        }
+    }
+    
+    func setDailyHumidityContainerView(view: UIView, imageView: UIImageView , container: UIView) {
+        view.addSubview(container)
+        container.backgroundColor = .systemPink
+        
+        container.snp.makeConstraints { make in
+            make.centerY.equalTo(imageView.snp.centerY)
+            make.trailing.equalTo(view.snp.trailing).offset(-10)
+            make.width.equalTo(180)
+            make.height.equalTo(30)
+        }
+    }
+    
+    func  setDailyWindContainerView(view: UIView, imageView: UIImageView , container: UIView) {
+        view.addSubview(container)
+        
+        container.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-8)
+            make.trailing.equalTo(view.snp.trailing).offset(-10)
+            make.width.equalTo(180)
+            make.height.equalTo(30)
+        }
+    }
+    
+    func setDailyView(container: UIView, subview: UIView) {
+        container.addSubview(subview)
+        
+        subview.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalTo(container)
         }
     }
     
@@ -161,12 +190,25 @@ extension UIView {
     func setDailyIndexesContainer(view: UIView, container: UIStackView) {
         view.addSubview(container)
         container.axis = .horizontal
-        container.distribution = .fillEqually
+        container.distribution = .fill
         container.backgroundColor = .systemGray
         
         container.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(30)
+        }
+    }
+    
+    func setLabelContainerView(container: UIStackView, leftLabel: UILabel, rightLabel: UILabel) {
+        container.addAllSubbviews(leftLabel, rightLabel)
+        leftLabel.backgroundColor = .brown
+
+        container.axis = .horizontal
+        container.distribution = .fillEqually
+        container.backgroundColor = .systemPink
+        
+        container.snp.makeConstraints { make in
+            make.width.equalTo(140)
         }
         
     }

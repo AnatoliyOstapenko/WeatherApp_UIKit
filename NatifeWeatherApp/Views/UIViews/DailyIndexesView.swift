@@ -11,9 +11,11 @@ enum IndexType { case temperature, humidity, wind }
 
 class DailyIndexesView: UIView {
     
-    let dailyIndexesContainer = UIStackView()
-    let symbolImageView = UIImageView()
-    let indexLabel = WeatherSecondaryLabel(fontSize: 18)
+    private let dailyIndexesContainer = UIStackView()
+    private let symbolImageView = UIImageView()
+    private let labelContainerView = UIStackView()
+    private let leftIndexLabel = WeatherSecondaryLabel(fontSize: 18)
+    private let rightIndexLabel = WeatherSecondaryLabel(fontSize: 18)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,13 +28,15 @@ class DailyIndexesView: UIView {
     
     private func configure() {
         dailyIndexesContainer.setDailyIndexesContainer(view: self, container: dailyIndexesContainer)
-        dailyIndexesContainer.addAllSubbviews(symbolImageView, indexLabel)
+        dailyIndexesContainer.addAllSubbviews(symbolImageView, labelContainerView)
+        labelContainerView.setLabelContainerView(container: labelContainerView, leftLabel: leftIndexLabel, rightLabel: rightIndexLabel)
         symbolImageView.tintColor = .label
-        indexLabel.tintColor = .label
+        leftIndexLabel.tintColor = .label
+        rightIndexLabel.tintColor = .label
         symbolImageView.contentMode = .center
     }
     
-    func set(indexImage: IndexType, indexText: String) {
+    func set(indexImage: IndexType, leftIndexText: String, rightIndexText: String? = nil) {
         switch indexImage {
         case .temperature:
             symbolImageView.image = SFSymbols.temperature
@@ -41,7 +45,8 @@ class DailyIndexesView: UIView {
         case .wind:
             symbolImageView.image = SFSymbols.wind
         }
-        indexLabel.text = indexText
+        leftIndexLabel.text = leftIndexText
+        rightIndexLabel.text = rightIndexText
     }
 }
 
