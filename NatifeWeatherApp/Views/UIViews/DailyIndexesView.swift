@@ -7,12 +7,13 @@
 
 import UIKit
 
-enum IndexInfoType { case temperature, humidity, wind }
+enum IndexType { case temperature, humidity, wind }
 
 class DailyIndexesView: UIView {
     
+    let dailyIndexesContainer = UIStackView()
     let symbolImageView = UIImageView()
-    let indexLabel = UILabel()
+    let indexLabel = WeatherSecondaryLabel(fontSize: 18)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,22 +25,23 @@ class DailyIndexesView: UIView {
     }
     
     private func configure() {
-
+        dailyIndexesContainer.setDailyIndexesContainer(view: self, container: dailyIndexesContainer)
+        dailyIndexesContainer.addAllSubbviews(symbolImageView, indexLabel)
+        symbolImageView.tintColor = .label
+        indexLabel.tintColor = .label
+        symbolImageView.contentMode = .center
     }
     
-    func set(itemInfoType: IndexInfoType, index: String) {
-        
-        switch itemInfoType {
+    func set(indexImage: IndexType, indexText: String) {
+        switch indexImage {
         case .temperature:
             symbolImageView.image = SFSymbols.temperature
-            indexLabel.text = "21 C"
         case .humidity:
             symbolImageView.image = SFSymbols.humidity
-            indexLabel.text = "33 %"
         case .wind:
             symbolImageView.image = SFSymbols.wind
-            indexLabel.text = "5 m/s"
         }
+        indexLabel.text = indexText
     }
 }
 

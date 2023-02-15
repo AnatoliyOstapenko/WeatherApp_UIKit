@@ -169,7 +169,7 @@
 				BCB3065229992F450088ADBC /* ChildViewControllers */,
 				BCB3065C29994FE00088ADBC /* UILabels */,
 				BCB3065D29994FFA0088ADBC /* UIImageViews */,
-				BCB306622999548A0088ADBC /* DailyIndexesView.swift */,
+				BCB3066429995FCA0088ADBC /* UIViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +207,14 @@
 				BCB3065A29994A410088ADBC /* WeatherImageView.swift */,
 			);
 			path = UIImageViews;
+			sourceTree = "<group>";
+		};
+		BCB3066429995FCA0088ADBC /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				BCB306622999548A0088ADBC /* DailyIndexesView.swift */,
+			);
+			path = UIViews;
 			sourceTree = "<group>";
 		};
 		C4CAAF7C093F0AF7DFA8A2AF /* Frameworks */ = {

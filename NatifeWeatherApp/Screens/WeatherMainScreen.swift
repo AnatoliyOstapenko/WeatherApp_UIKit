@@ -16,11 +16,13 @@ class WeatherMainScreen: UIViewController {
     // MARK: - Private properties
     private var weather: [WeatherList] = []
     
-    let mainStackView = UIStackView()
-    private let topNameViewContainer = UIView()
-    private let dailyWeatherViewContainer = UIView()
-    private let hourlyWeatherViewContainer = UIView()
-    private let forecastWeatherViewContainer = UIView()
+    var scrollView = UIScrollView()
+    var contentView = UIView()
+    
+    var topNameViewContainer = UIView()
+    var dailyWeatherViewContainer = UIView()
+    var hourlyWeatherViewContainer = UIView()
+    var forecastWeatherViewContainer = UIView()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -32,11 +34,15 @@ class WeatherMainScreen: UIViewController {
     // MARK: - Private methods
     private func configureUI() {
         view.backgroundColor = UIColor(hex: Constants.darkBlue)
-        mainStackView.setMainStackVeiw(view: view, stackView: mainStackView)
-        mainStackView.addAllSubbviews(topNameViewContainer, dailyWeatherViewContainer, hourlyWeatherViewContainer, forecastWeatherViewContainer)
+        scrollView.setScrollView(view: view, scrollView: scrollView)
+        contentView.setContentView(view: scrollView, content: contentView)
+        topNameViewContainer.setTopNameViewContainer(view: contentView,
+                                                     container: topNameViewContainer)
+        dailyWeatherViewContainer.setDailyWeatherViewContainer(view: contentView,
+                                                               topcontainer: topNameViewContainer,
+                                                               container: dailyWeatherViewContainer)
         
         /// delete after debuging:
-        dailyWeatherViewContainer.backgroundColor = .yellow
         hourlyWeatherViewContainer.backgroundColor = .cyan
         forecastWeatherViewContainer.backgroundColor = .brown
     }
@@ -49,7 +55,8 @@ class WeatherMainScreen: UIViewController {
     }
     
     private func setChildView() {
-        self.addChildVC(childVC: TopNameViewController(weather: self.weather.first ?? MockWeather.mockWeather), containerView: topNameViewContainer)
+        addChildVC(childVC: TopNameViewController(weather: MockWeather.mockWeather), containerView: topNameViewContainer)
+        addChildVC(childVC: DailyWeatherViewController(weather: MockWeather.mockWeather), containerView: dailyWeatherViewContainer)
     }
 
 

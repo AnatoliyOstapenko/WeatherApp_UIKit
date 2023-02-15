@@ -20,7 +20,9 @@ class WeatherImageView: UIImageView {
     
     private func configure() {
         image = UIImage(systemName: "cloud.sun")
-        translatesAutoresizingMaskIntoConstraints = false
+        tintColor = .label
+        clipsToBounds = true
+        contentMode = .scaleAspectFit
     }
     
     func setImage(avatar: String?) {
