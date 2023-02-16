@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC3126F4299E4E1900DD5FD0 /* HourlyWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3126F3299E4E1900DD5FD0 /* HourlyWeatherViewController.swift */; };
+		BC3126F6299E51DE00DD5FD0 /* ForecastWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3126F5299E51DE00DD5FD0 /* ForecastWeatherViewController.swift */; };
 		BCB306272997BE550088ADBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB306262997BE550088ADBC /* AppDelegate.swift */; };
 		BCB306292997BE550088ADBC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB306282997BE550088ADBC /* SceneDelegate.swift */; };
 		BCB3062B2997BE550088ADBC /* WeatherMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB3062A2997BE550088ADBC /* WeatherMainScreen.swift */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		B5882D76B1F5D2441127BB1B /* Pods_NatifeWeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatifeWeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B70DE15088FE3E1E0557AF80 /* Pods-NatifeWeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatifeWeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-NatifeWeatherApp/Pods-NatifeWeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		BC3126F3299E4E1900DD5FD0 /* HourlyWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherViewController.swift; sourceTree = "<group>"; };
+		BC3126F5299E51DE00DD5FD0 /* ForecastWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherViewController.swift; sourceTree = "<group>"; };
 		BCB306232997BE550088ADBC /* NatifeWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatifeWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCB306262997BE550088ADBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCB306282997BE550088ADBC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 			children = (
 				BCB3064A299925880088ADBC /* TopNameViewController.swift */,
 				BCB30660299950E10088ADBC /* DailyWeatherViewController.swift */,
+				BC3126F3299E4E1900DD5FD0 /* HourlyWeatherViewController.swift */,
+				BC3126F5299E51DE00DD5FD0 /* ForecastWeatherViewController.swift */,
 			);
 			path = ChildViewControllers;
 			sourceTree = "<group>";
@@ -350,10 +356,12 @@
 			files = (
 				BCB3063F2997C2E70088ADBC /* WeatherPresenter.swift in Sources */,
 				BCB3062B2997BE550088ADBC /* WeatherMainScreen.swift in Sources */,
+				BC3126F4299E4E1900DD5FD0 /* HourlyWeatherViewController.swift in Sources */,
 				BCB3064929991E2F0088ADBC /* UIView+Ext.swift in Sources */,
 				BCB306632999548A0088ADBC /* DailyIndexesView.swift in Sources */,
 				BCB306272997BE550088ADBC /* AppDelegate.swift in Sources */,
 				BCB306292997BE550088ADBC /* SceneDelegate.swift in Sources */,
+				BC3126F6299E51DE00DD5FD0 /* ForecastWeatherViewController.swift in Sources */,
 				BCB306452997C51A0088ADBC /* NetworkManager.swift in Sources */,
 				BCB30657299948AC0088ADBC /* WeatherTitleLabel.swift in Sources */,
 				BCB306432997C3A50088ADBC /* Constants.swift in Sources */,

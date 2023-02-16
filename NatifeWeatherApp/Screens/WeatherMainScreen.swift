@@ -19,10 +19,10 @@ class WeatherMainScreen: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let topNameViewContainer = UIView()
-    private let dailyWeatherViewContainer = UIView()
-    private let hourlyWeatherViewContainer = UIView()
-    private let forecastWeatherViewContainer = UIView()
+    private let topNameContainer = UIView()
+    private let dailyWeatherContainer = UIView()
+    private let hourlyWeatherContainer = UIView()
+    private let forecastWeatherContainer = UIView()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,17 +34,17 @@ class WeatherMainScreen: UIViewController {
     // MARK: - Private methods
     private func configureUI() {
         view.backgroundColor = UIColor(hex: Constants.darkBlue)
+        /// Set ScrollView for adaptive layout
         scrollView.setScrollView(view: view, scrollView: scrollView)
         contentView.setContentView(view: scrollView, content: contentView)
-        topNameViewContainer.setTopNameViewContainer(view: contentView,
-                                                     container: topNameViewContainer)
-        dailyWeatherViewContainer.setDailyWeatherViewContainer(view: contentView,
-                                                               topcontainer: topNameViewContainer,
-                                                               container: dailyWeatherViewContainer)
-        
-        /// delete after debuging:
-        hourlyWeatherViewContainer.backgroundColor = .cyan
-        forecastWeatherViewContainer.backgroundColor = .brown
+        /// Set containers layouts
+        topNameContainer.setTopNameContainer(view: contentView,
+                                                     container: topNameContainer)
+        dailyWeatherContainer.setDailyWeatherContainer(view: contentView,
+                                                               topcontainer: topNameContainer,
+                                                               container: dailyWeatherContainer)
+        hourlyWeatherContainer.setHourlyWeatherContainer(view: contentView, topcontainer: dailyWeatherContainer, container: hourlyWeatherContainer)
+        forecastWeatherContainer.setForecastWeatherContainer(superview: view, view: contentView, topcontainer: hourlyWeatherContainer, container: forecastWeatherContainer)
     }
     
     private func addChildVC(childVC: UIViewController, containerView: UIView) {
@@ -55,8 +55,10 @@ class WeatherMainScreen: UIViewController {
     }
     
     private func setChildView() {
-        addChildVC(childVC: TopNameViewController(weather: MockWeather.mockWeather), containerView: topNameViewContainer)
-        addChildVC(childVC: DailyWeatherViewController(weather: MockWeather.mockWeather), containerView: dailyWeatherViewContainer)
+        addChildVC(childVC: TopNameViewController(weather: MockWeather.mockWeather), containerView: topNameContainer)
+        addChildVC(childVC: DailyWeatherViewController(weather: MockWeather.mockWeather), containerView: dailyWeatherContainer)
+        addChildVC(childVC: HourlyWeatherViewController(weather: MockWeather.mockWeatherArray), containerView: hourlyWeatherContainer)
+        addChildVC(childVC: ForecastWeatherViewController(weather: MockWeather.mockWeatherArray), containerView: forecastWeatherContainer)
     }
 
 

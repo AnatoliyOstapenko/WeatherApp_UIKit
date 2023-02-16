@@ -37,12 +37,13 @@ class DailyWeatherViewController: UIViewController {
     }
     
     private func configureUI() {
+        /// Set the main weather image
         weatherImageView.setWeatherImage(view: view, imageView: weatherImageView)
-        
+        /// Set containers
         temperatureContainer.setTemperatureContainer(view: view, imageView: weatherImageView, container: temperatureContainer)
         humidityContainer.setHumidityContainer(view: view, imageView: weatherImageView, container: humidityContainer)
         windContainer.setWindContainer(view: view, imageView: weatherImageView, container: windContainer)
-        
+        /// Set views
         temperatureView.setDailyView(container: temperatureContainer, subview: temperatureView)
         humidityView.setDailyView(container: humidityContainer, subview: humidityView)
         windView.setDailyView(container: windContainer, subview: windView)
@@ -50,7 +51,7 @@ class DailyWeatherViewController: UIViewController {
     }
     
     private func updateUI() {
-        temperatureView.set(indexImage: .temperature, leftIndexText: "18 C/", rightIndexText: "24C")
+        temperatureView.set(indexImage: .temperature, leftIndexText: "18 C /", rightIndexText: "24C")
         humidityView.set(indexImage: .humidity, leftIndexText: "30 %")
         windView.set(indexImage: .wind, leftIndexText: "30 m/s", rightIndexText: "↖︎")
     }

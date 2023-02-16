@@ -36,4 +36,7 @@ struct MockWeather {
                                   weather: [Weather(icon: "Foo")],
                                   date: 0,
                                   wind: Wind(speed: 1, deg: 2))
+    
+    static let mockWeatherArray = Array(repeating: mockWeather, count: 3)
+    
 }

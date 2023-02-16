@@ -16,7 +16,8 @@ extension UIView {
         view.addSubview(scrollView)
 
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view)
         }
     }
     
@@ -24,13 +25,13 @@ extension UIView {
         view.addSubview(content)
 
         content.snp.makeConstraints { make in
-            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(600)
+            make.top.bottom.equalTo(view)
+            make.width.equalTo(view)
+            make.height.equalTo(740)
         }
     }
     
-    func setTopNameViewContainer(view: UIView, container: UIView) {
+    func setTopNameContainer(view: UIView, container: UIView) {
         view.addSubview(container)
 
         container.snp.makeConstraints { make in
@@ -39,22 +40,34 @@ extension UIView {
         }
     }
     
-    func setDailyWeatherViewContainer(view: UIView, topcontainer: UIView, container: UIView) {
+    func setDailyWeatherContainer(view: UIView, topcontainer: UIView, container: UIView) {
         view.addSubview(container)
 
         container.snp.makeConstraints { make in
-            make.top.equalTo(topcontainer.snp.bottom)
+            make.top.equalTo(topcontainer.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(130)
+            make.height.equalTo(120)
         }
     }
     
-    func setHourlyWeatherViewContainer(view: UIView, topcontainer: UIView, container: UIView) {
+    func setHourlyWeatherContainer(view: UIView, topcontainer: UIView, container: UIView) {
+        view.addSubview(container)
         
+        container.snp.makeConstraints { make in
+            make.top.equalTo(topcontainer.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(120)
+        }
     }
     
-    func setForecastWeatherViewContainer(view: UIView, topcontainer: UIView, container: UIView) {
+    func setForecastWeatherContainer(superview: UIView, view: UIView, topcontainer: UIView, container: UIView) {
+        view.addSubview(container)
         
+        container.snp.makeConstraints { make in
+            make.top.equalTo(topcontainer.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(superview.snp.bottom)
+        }
     }
 
     
@@ -100,7 +113,7 @@ extension UIView {
         
         image.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(5)
-            make.trailing.equalTo(view.snp.trailing).offset(-40)
+            make.trailing.equalTo(view.snp.trailing).offset(-20)
             make.width.equalTo(30)
             make.height.equalTo(30)
         }
