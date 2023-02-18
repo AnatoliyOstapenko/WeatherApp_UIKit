@@ -256,8 +256,22 @@ extension UIView {
     }
 }
 
+// MARK: - Add views to StackView at the same time
+
 extension UIStackView {
     func addAllSubbviews(_ views: UIView...) {
         views.forEach { addArrangedSubview($0) }
+    }
+}
+
+// MARK: - Shadow for row of Hourly sell
+
+extension UIView {
+    func addShadow(){
+        self.backgroundColor = .white
+        self.layer.shadowColor = UIColor(hex: Constants.darkBlue).cgColor
+        self.layer.shadowOpacity = 0.8
+        self.layer.shadowRadius = 5.0
+        self.layer.shadowOffset = CGSizeMake(2.0, 2.0)
     }
 }

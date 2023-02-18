@@ -20,17 +20,19 @@ class WeatherLabel: UILabel {
     
     convenience init(textAlignment: NSTextAlignment = .center,
                      fontSize: CGFloat,
-                     weight: UIFont.Weight) {
+                     weight: UIFont.Weight,
+                     color: UIColor = .white) {
         self.init(frame: .zero)
         self.textAlignment = textAlignment
         font = .systemFont(ofSize: fontSize, weight: weight)
+        textColor = color
     }
     
     private func configure() {
-        textColor = .white
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail
+        highlightedTextColor = UIColor(hex: Constants.darkBlue)
     }
 
 }

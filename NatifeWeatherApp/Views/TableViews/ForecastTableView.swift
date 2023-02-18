@@ -23,6 +23,7 @@ class ForecastTableView: UITableView {
         register(ForecastTableViewCell.self, forCellReuseIdentifier: String(describing: ForecastTableViewCell.self))
         dataSource = self
         delegate = self
+        separatorStyle = .none
     }
 }
 
@@ -33,8 +34,6 @@ extension ForecastTableView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ForecastTableViewCell.self), for: indexPath) as! ForecastTableViewCell
-        
-        
         return cell
     }
     

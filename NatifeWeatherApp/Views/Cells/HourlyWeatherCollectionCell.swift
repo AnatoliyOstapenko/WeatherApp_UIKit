@@ -9,9 +9,9 @@ import UIKit
 
 class HourlyWeatherCollectionCell: UICollectionViewCell {
     
-    private let hourLabel = WeatherLabel(fontSize: 16, weight: .medium)
+    private let hourLabel = WeatherLabel(fontSize: 18, weight: .medium)
     private let weatherImage = WeatherImageView(frame: .zero)
-    private let temperatureLabel = WeatherLabel(fontSize: 18, weight: .medium)
+    private let temperatureLabel = WeatherLabel(fontSize: 20, weight: .medium)
     private let bottomContainer = UIStackView()
     
     override init(frame: CGRect) {
@@ -26,11 +26,9 @@ class HourlyWeatherCollectionCell: UICollectionViewCell {
     private func configureUI() {
         hourLabel.text = "22ºº"
         temperatureLabel.text = "18º"
-        
         setHourLabel(view: self, label: hourLabel)
         setBottomContainer(view: self, container: bottomContainer)
         bottomContainer.addAllSubbviews(weatherImage, temperatureLabel)
-        weatherImage.contentMode = .center
     }
     
     func updateCollectionCellUI() {

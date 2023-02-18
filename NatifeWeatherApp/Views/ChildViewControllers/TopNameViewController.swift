@@ -12,9 +12,9 @@ class TopNameViewController: UIViewController {
     private var weather: WeatherList?
     
     private let mapImageView = UIImageView()
+    private let locationImageView = UIImageView()
     private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
     private let currentDateLabel = WeatherLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    private let locationImageView = UIImageView()
     
     init(weather: WeatherList) {
         super.init(nibName: nil, bundle: nil)
@@ -35,13 +35,15 @@ class TopNameViewController: UIViewController {
         mapImageView.setMapImage(view: view, image: mapImageView)
         cityNameLabel.setCityName(view: view, image: mapImageView, label: cityNameLabel)
         currentDateLabel.setCurrentDate(view: view, image: mapImageView, label: currentDateLabel)
-        locationImageView.setLocationImage(view: view, image: locationImageView)        
+        locationImageView.setLocationImage(view: view, image: locationImageView)
+        mapImageView.tintColor = .white
+        locationImageView.tintColor = .white
+        mapImageView.image = SFSymbols.map
+        locationImageView.image = SFSymbols.location
     }
     
     private func updateUI() {
-        self.mapImageView.image = SFSymbols.map
         self.cityNameLabel.text = "Kyiv"
         self.currentDateLabel.text = "December 03, 2023"
-        self.locationImageView.image = SFSymbols.location
     }
 }

@@ -33,7 +33,7 @@ class DailyIndexesView: UIView {
         labelContainerView.setLabelContainerView(container: labelContainerView)
         labelContainerView.addAllSubbviews(leftIndexLabel, rightIndexLabel, paddingView)
 
-        symbolImageView.tintColor = .label
+        symbolImageView.tintColor = .white
         symbolImageView.contentMode = .center
     }
     
