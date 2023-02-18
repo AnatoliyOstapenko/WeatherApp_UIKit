@@ -55,10 +55,10 @@ class WeatherMainScreen: UIViewController {
     }
     
     private func setChildView() {
-        addChildVC(childVC: TopNameViewController(weather: MockWeather.mockWeather), containerView: topNameContainer)
-        addChildVC(childVC: DailyWeatherViewController(weather: MockWeather.mockWeather), containerView: dailyWeatherContainer)
-        addChildVC(childVC: HourlyWeatherViewController(weather: MockWeather.mockWeatherArray), containerView: hourlyWeatherContainer)
-        addChildVC(childVC: ForecastWeatherViewController(weather: MockWeather.mockWeatherArray), containerView: forecastWeatherContainer)
+        addChildVC(childVC: TopNameViewController(weather: WeatherMockModel.mockWeather), containerView: topNameContainer)
+        addChildVC(childVC: DailyWeatherViewController(weather: WeatherMockModel.mockWeather), containerView: dailyWeatherContainer)
+        addChildVC(childVC: HourlyWeatherViewController(weather: WeatherMockModel.mockWeatherArray), containerView: hourlyWeatherContainer)
+        addChildVC(childVC: ForecastWeatherViewController(weather: WeatherMockModel.mockWeatherArray), containerView: forecastWeatherContainer)
     }
 
 

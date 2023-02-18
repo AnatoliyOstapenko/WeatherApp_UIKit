@@ -1,5 +1,5 @@
 //
-//  WeatherTitleLabel.swift
+//  WeatherSecondaryLabel.swift
 //  NatifeWeatherApp
 //
 //  Created by AnatoliiOstapenko on 12.02.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherTitleLabel: UILabel {
+class WeatherLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,18 +18,19 @@ class WeatherTitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(textAligment: NSTextAlignment, fontSize: CGFloat) {
+    convenience init(textAlignment: NSTextAlignment = .center,
+                     fontSize: CGFloat,
+                     weight: UIFont.Weight) {
         self.init(frame: .zero)
-        self.textAlignment = textAligment
-        self.font = .systemFont(ofSize: fontSize, weight: .bold)
+        self.textAlignment = textAlignment
+        font = .systemFont(ofSize: fontSize, weight: weight)
     }
     
     private func configure() {
-        textColor = .label
+        textColor = .white
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail
-        translatesAutoresizingMaskIntoConstraints = false
     }
 
 }

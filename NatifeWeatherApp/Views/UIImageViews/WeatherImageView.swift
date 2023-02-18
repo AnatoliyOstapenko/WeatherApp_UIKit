@@ -20,7 +20,7 @@ class WeatherImageView: UIImageView {
     
     private func configure() {
         image = UIImage(systemName: "cloud.sun")
-        tintColor = .label
+        tintColor = .white
         clipsToBounds = true
         contentMode = .scaleAspectFit
     }

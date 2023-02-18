@@ -12,8 +12,8 @@ class TopNameViewController: UIViewController {
     private var weather: WeatherList?
     
     private let mapImageView = UIImageView()
-    private let cityNameLabel = WeatherTitleLabel(textAligment: .left, fontSize: 28)
-    private let currentDateLabel = WeatherSecondaryLabel(fontSize: 18)
+    private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
+    private let currentDateLabel = WeatherLabel(textAlignment: .left, fontSize: 18, weight: .medium)
     private let locationImageView = UIImageView()
     
     init(weather: WeatherList) {

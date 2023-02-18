@@ -56,7 +56,7 @@ extension UIView {
         container.snp.makeConstraints { make in
             make.top.equalTo(topcontainer.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(120)
+            make.height.equalTo(140)
         }
     }
     
@@ -80,8 +80,7 @@ extension UIView {
         image.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(5)
             make.leading.equalTo(view.snp.leading).offset(20)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
+            make.width.height.equalTo(30)
         }
     }
     
@@ -114,8 +113,7 @@ extension UIView {
         image.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(5)
             make.trailing.equalTo(view.snp.trailing).offset(-20)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
+            make.width.height.equalTo(30)
         }
     }
     
@@ -192,6 +190,68 @@ extension UIView {
         
         container.snp.makeConstraints { make in
             make.width.equalTo(140)
+        }
+    }
+    
+    // MARK: - HourlyWeatherCollectionCell Layout
+    
+    func setHourLabel(view: UIView, label: UILabel) {
+        view.addSubview(label)
+    
+        label.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(25)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+    }
+    
+    func setBottomContainer(view: UIView, container: UIStackView) {
+        view.addSubview(container)
+        container.axis = .vertical
+        container.distribution = .fill
+        container.spacing = 5
+        
+        container.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-25)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+    }
+    
+    // MARK: - ForecastTableViewCell Layout
+
+    func setTempContainer(view: UIView, container: UIStackView) {
+        view.addSubview(container)
+        container.axis = .horizontal
+        container.distribution = .fill
+        
+        container.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview()
+            make.width.equalTo(100)
+        }
+    }
+    
+    func setDayLabel(view: UIView, label: UILabel) {
+        view.addSubview(label)
+        
+        label.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+            make.height.equalToSuperview()
+            make.width.equalTo(80)
+        }
+    }
+    
+    func setWeatherImageView(view: UIView, imageView: UIImageView) {
+        view.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-20)
+            make.centerY.equalToSuperview()
+            make.height.equalToSuperview()
+            make.width.equalTo(30)
         }
     }
 }

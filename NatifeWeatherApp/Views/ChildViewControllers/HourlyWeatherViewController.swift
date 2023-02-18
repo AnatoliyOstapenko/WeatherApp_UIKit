@@ -10,6 +10,7 @@ import UIKit
 class HourlyWeatherViewController: UIViewController {
     
     private var weather: [WeatherList] = []
+    private var hourlyCollectionView = HourlyWeatherCollectionView()
     
     init(weather: [WeatherList]) {
         super.init(nibName: nil, bundle: nil)
@@ -25,10 +26,13 @@ class HourlyWeatherViewController: UIViewController {
         configureUI()
     }
     
-    private func configureUI() {
-        view.backgroundColor = UIColor(hex: Constants.lightBlue)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        hourlyCollectionView.frame = view.bounds
     }
     
-
-
+    private func configureUI() {
+        view.backgroundColor = UIColor(hex: Constants.lightBlue)
+        view.addSubview(hourlyCollectionView)
+    }
 }

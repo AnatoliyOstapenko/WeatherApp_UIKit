@@ -13,6 +13,7 @@ enum Constants {
     static let baseIconURL = "https://openweathermap.org/img/wn/"
     static let darkBlue = "#4a90e2"
     static let lightBlue = "#5a9ff0"
+    static let cellItemWidth: CGFloat = 70
 }
 
 enum SFSymbols {
@@ -31,7 +32,7 @@ enum SFSymbols {
 /// forecast weather by city name
 ///https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=d5422e041170c6bebf329350df7140bf&q=kyiv
 
-struct MockWeather {
+struct WeatherMockModel {
     static let mockWeather = WeatherList(main: Main(temp: 0, humidity: 0, tempMin: 0, tempMax: 0),
                                   weather: [Weather(icon: "Foo")],
                                   date: 0,

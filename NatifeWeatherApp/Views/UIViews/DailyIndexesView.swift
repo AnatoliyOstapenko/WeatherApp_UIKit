@@ -15,8 +15,8 @@ class DailyIndexesView: UIView {
     private let symbolImageView = UIImageView()
     private let labelContainerView = UIStackView()
     private let paddingView = UIView()
-    private let leftIndexLabel = WeatherSecondaryLabel(fontSize: 18)
-    private let rightIndexLabel = WeatherSecondaryLabel(fontSize: 18)
+    private let leftIndexLabel = WeatherLabel(fontSize: 18, weight: .medium)
+    private let rightIndexLabel = WeatherLabel(fontSize: 18, weight: .medium)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

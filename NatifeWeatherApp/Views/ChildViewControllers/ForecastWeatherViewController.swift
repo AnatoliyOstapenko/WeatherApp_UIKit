@@ -9,6 +9,7 @@ import UIKit
 
 class ForecastWeatherViewController: UIViewController {
     
+    private let tableView = ForecastTableView()
     private var weather: [WeatherList] = []
     
     init(weather: [WeatherList]) {
@@ -27,5 +28,11 @@ class ForecastWeatherViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
+        view.addSubview(tableView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
     }
 }

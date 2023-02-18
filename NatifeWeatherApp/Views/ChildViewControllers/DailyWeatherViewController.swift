@@ -10,13 +10,11 @@ import UIKit
 class DailyWeatherViewController: UIViewController {
     
     private var weather: WeatherList?
-
+    
+    private let weatherImageView = WeatherImageView(frame: .zero)
     private let temperatureContainer = UIView()
     private let humidityContainer = UIView()
     private let windContainer = UIView()
-
-    private let weatherImageView = WeatherImageView(frame: .zero)
-    
     private let temperatureView = DailyIndexesView()
     private let humidityView = DailyIndexesView()
     private let windView = DailyIndexesView()
@@ -51,7 +49,7 @@ class DailyWeatherViewController: UIViewController {
     }
     
     private func updateUI() {
-        temperatureView.set(indexImage: .temperature, leftIndexText: "18 C /", rightIndexText: "24C")
+        temperatureView.set(indexImage: .temperature, leftIndexText: "18 C /", rightIndexText: "24 C")
         humidityView.set(indexImage: .humidity, leftIndexText: "30 %")
         windView.set(indexImage: .wind, leftIndexText: "30 m/s", rightIndexText: "↖︎")
     }
