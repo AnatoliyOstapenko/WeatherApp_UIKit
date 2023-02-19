@@ -32,7 +32,6 @@ class WeatherLabel: UILabel {
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail
-        highlightedTextColor = UIColor(hex: Constants.darkBlue)
     }
 
 }

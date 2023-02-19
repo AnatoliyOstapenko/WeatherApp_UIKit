@@ -7,11 +7,10 @@
 
 import UIKit
 
-class TopNameViewController: UIViewController {
+class TopNameViewController: RotatableViewController {
     
     private var weather: WeatherList?
-    
-    private let container = UIView()
+
     private let mapImageView = UIImageView()
     private let locationImageView = UIImageView()
     private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
@@ -35,7 +34,7 @@ class TopNameViewController: UIViewController {
     private func configureUI() {
         /// Set generic container to change constraints when rotating the iPhone
         container.setGenericContainer(view: view, container: container)
-        
+
         /// Set UI  layouts
         mapImageView.setMapImage(view: container, image: mapImageView)
         cityNameLabel.setCityName(view: container, image: mapImageView, label: cityNameLabel)
@@ -52,18 +51,5 @@ class TopNameViewController: UIViewController {
     private func updateUI() {
         self.cityNameLabel.text = "Kyiv"
         self.currentDateLabel.text = "December 03, 2023"
-    }
-}
-
-extension TopNameViewController {
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        let isPortrait = UIDevice.current.orientation.isPortrait
-        
-        /// Change constraints when device rotating has been changed
-        container.snp.updateConstraints { make in
-            make.leading.equalTo(isPortrait ? 0 : 60)
-            make.trailing.equalTo(isPortrait ? 0 : -60)
-        }
     }
 }

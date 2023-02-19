@@ -7,11 +7,10 @@
 
 import UIKit
 
-class DailyWeatherViewController: UIViewController {
+class DailyWeatherViewController: RotatableViewController {
     
     private var weather: WeatherList?
 
-    private let container = UIView()
     private let weatherImageView = WeatherImageView(frame: .zero)
     private let temperatureContainer = UIView()
     private let humidityContainer = UIView()
@@ -58,18 +57,5 @@ class DailyWeatherViewController: UIViewController {
         temperatureView.set(indexImage: .temperature, leftIndexText: "18 C /", rightIndexText: "24 C")
         humidityView.set(indexImage: .humidity, leftIndexText: "30 %")
         windView.set(indexImage: .wind, leftIndexText: "30 m/s", rightIndexText: "↖︎")
-    }
-}
-
-extension DailyWeatherViewController {
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        let isPortrait = UIDevice.current.orientation.isPortrait
-        
-        /// Change constraints when device rotating has been changed
-        container.snp.updateConstraints { make in
-            make.leading.equalTo(isPortrait ? 0 : 60)
-            make.trailing.equalTo(isPortrait ? 0 : -60)
-        }
     }
 }

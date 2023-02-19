@@ -38,10 +38,13 @@ class ForecastTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+
         weatherImageView.tintColor = selected ? UIColor(hex: Constants.darkBlue) : .black
+        dayLabel.textColor = selected ? UIColor(hex: Constants.darkBlue) : .black
+        minTempLabel.textColor = selected ? UIColor(hex: Constants.darkBlue) : .black
+        maxTempLabel.textColor = selected ? UIColor(hex: Constants.darkBlue) : .black
     }
 
-    
     private func handleSelecting() {
         let initialView = UIView(frame: bounds)
         initialView.backgroundColor = .white

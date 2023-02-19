@@ -7,9 +7,8 @@
 
 import UIKit
 
-class ForecastWeatherViewController: UIViewController {
+class ForecastWeatherViewController: RotatableViewController {
     
-    private let container = UIView()
     private let tableView = ForecastTableView()
     private var weather: [WeatherList] = []
     
@@ -36,18 +35,5 @@ class ForecastWeatherViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = container.bounds
-    }
-}
-
-extension ForecastWeatherViewController {
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        let isPortrait = UIDevice.current.orientation.isPortrait
-        
-        /// Change constraints when device rotating has been changed
-        container.snp.updateConstraints { make in
-            make.leading.equalTo(isPortrait ? 0 : 60)
-            make.trailing.equalTo(isPortrait ? 0 : -60)
-        }
     }
 }
