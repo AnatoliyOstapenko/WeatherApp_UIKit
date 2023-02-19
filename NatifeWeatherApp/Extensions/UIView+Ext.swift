@@ -16,7 +16,7 @@ extension UIView {
         view.addSubview(scrollView)
 
         scrollView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.leading.trailing.equalToSuperview()
             make.bottom.equalTo(view)
         }
     }
@@ -73,9 +73,17 @@ extension UIView {
     
     // MARK: - TopNameViewController Layout
     
+    func setGenericContainer(view: UIView, container: UIView) {
+        view.addSubview(container)
+        container.backgroundColor = .clear
+        
+        container.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
+    }
+    
     func setMapImage(view: UIView, image: UIImageView) {
         view.addSubview(image)
-        image.tintColor = .label
         
         image.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(5)
@@ -129,7 +137,7 @@ extension UIView {
         }
     }
     
-    func setTemperatureContainer(view: UIView, imageView: UIImageView , container: UIView) {
+    func setTemperatureContainer(view: UIView, container: UIView) {
         view.addSubview(container)
         
         container.snp.makeConstraints { make in
@@ -151,7 +159,7 @@ extension UIView {
         }
     }
     
-    func  setWindContainer(view: UIView, imageView: UIImageView , container: UIView) {
+    func  setWindContainer(view: UIView, container: UIView) {
         view.addSubview(container)
         
         container.snp.makeConstraints { make in

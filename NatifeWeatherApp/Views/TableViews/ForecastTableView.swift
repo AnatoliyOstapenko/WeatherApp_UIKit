@@ -8,7 +8,7 @@
 import UIKit
 
 class ForecastTableView: UITableView {
-
+    
     init() {
         super.init(frame: .zero, style: .plain)
         configureUI()

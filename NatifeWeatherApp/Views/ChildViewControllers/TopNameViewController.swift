@@ -11,6 +11,7 @@ class TopNameViewController: UIViewController {
     
     private var weather: WeatherList?
     
+    private let container = UIView()
     private let mapImageView = UIImageView()
     private let locationImageView = UIImageView()
     private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
@@ -32,10 +33,16 @@ class TopNameViewController: UIViewController {
     }
     
     private func configureUI() {
-        mapImageView.setMapImage(view: view, image: mapImageView)
-        cityNameLabel.setCityName(view: view, image: mapImageView, label: cityNameLabel)
-        currentDateLabel.setCurrentDate(view: view, image: mapImageView, label: currentDateLabel)
-        locationImageView.setLocationImage(view: view, image: locationImageView)
+        /// Set generic container to change constraints when rotating the iPhone
+        container.setGenericContainer(view: view, container: container)
+        
+        /// Set UI  layouts
+        mapImageView.setMapImage(view: container, image: mapImageView)
+        cityNameLabel.setCityName(view: container, image: mapImageView, label: cityNameLabel)
+        currentDateLabel.setCurrentDate(view: container, image: mapImageView, label: currentDateLabel)
+        locationImageView.setLocationImage(view: container, image: locationImageView)
+        
+        /// Configure UI
         mapImageView.tintColor = .white
         locationImageView.tintColor = .white
         mapImageView.image = SFSymbols.map
@@ -45,5 +52,18 @@ class TopNameViewController: UIViewController {
     private func updateUI() {
         self.cityNameLabel.text = "Kyiv"
         self.currentDateLabel.text = "December 03, 2023"
+    }
+}
+
+extension TopNameViewController {
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        let isPortrait = UIDevice.current.orientation.isPortrait
+        
+        /// Change constraints when device rotating has been changed
+        container.snp.updateConstraints { make in
+            make.leading.equalTo(isPortrait ? 0 : 60)
+            make.trailing.equalTo(isPortrait ? 0 : -60)
+        }
     }
 }

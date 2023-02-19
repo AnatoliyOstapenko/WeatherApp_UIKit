@@ -9,6 +9,7 @@ import UIKit
 
 class ForecastWeatherViewController: UIViewController {
     
+    private let container = UIView()
     private let tableView = ForecastTableView()
     private var weather: [WeatherList] = []
     
@@ -28,11 +29,25 @@ class ForecastWeatherViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
-        view.addSubview(tableView)
+        container.setGenericContainer(view: view, container: container)
+        container.addSubview(tableView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+        tableView.frame = container.bounds
+    }
+}
+
+extension ForecastWeatherViewController {
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        let isPortrait = UIDevice.current.orientation.isPortrait
+        
+        /// Change constraints when device rotating has been changed
+        container.snp.updateConstraints { make in
+            make.leading.equalTo(isPortrait ? 0 : 60)
+            make.trailing.equalTo(isPortrait ? 0 : -60)
+        }
     }
 }

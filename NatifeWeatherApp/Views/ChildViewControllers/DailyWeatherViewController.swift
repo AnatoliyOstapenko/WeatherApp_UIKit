@@ -10,7 +10,8 @@ import UIKit
 class DailyWeatherViewController: UIViewController {
     
     private var weather: WeatherList?
-    
+
+    private let container = UIView()
     private let weatherImageView = WeatherImageView(frame: .zero)
     private let temperatureContainer = UIView()
     private let humidityContainer = UIView()
@@ -35,13 +36,18 @@ class DailyWeatherViewController: UIViewController {
     }
     
     private func configureUI() {
-        /// Set the main weather image
-        weatherImageView.setWeatherImage(view: view, imageView: weatherImageView)
-        /// Set containers
-        temperatureContainer.setTemperatureContainer(view: view, imageView: weatherImageView, container: temperatureContainer)
-        humidityContainer.setHumidityContainer(view: view, imageView: weatherImageView, container: humidityContainer)
-        windContainer.setWindContainer(view: view, imageView: weatherImageView, container: windContainer)
-        /// Set views
+        /// Set the main container
+        container.setGenericContainer(view: view, container: container)
+        
+        /// Set the weather image
+        weatherImageView.setWeatherImage(view: container, imageView: weatherImageView)
+        
+        /// Set UI containers
+        temperatureContainer.setTemperatureContainer(view: container, container: temperatureContainer)
+        humidityContainer.setHumidityContainer(view: container, imageView: weatherImageView, container: humidityContainer)
+        windContainer.setWindContainer(view: container, container: windContainer)
+        
+        /// Set UI views
         temperatureView.setDailyView(container: temperatureContainer, subview: temperatureView)
         humidityView.setDailyView(container: humidityContainer, subview: humidityView)
         windView.setDailyView(container: windContainer, subview: windView)
@@ -52,5 +58,18 @@ class DailyWeatherViewController: UIViewController {
         temperatureView.set(indexImage: .temperature, leftIndexText: "18 C /", rightIndexText: "24 C")
         humidityView.set(indexImage: .humidity, leftIndexText: "30 %")
         windView.set(indexImage: .wind, leftIndexText: "30 m/s", rightIndexText: "↖︎")
+    }
+}
+
+extension DailyWeatherViewController {
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        let isPortrait = UIDevice.current.orientation.isPortrait
+        
+        /// Change constraints when device rotating has been changed
+        container.snp.updateConstraints { make in
+            make.leading.equalTo(isPortrait ? 0 : 60)
+            make.trailing.equalTo(isPortrait ? 0 : -60)
+        }
     }
 }
