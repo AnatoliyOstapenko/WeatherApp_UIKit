@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HourlyWeatherViewController: UIViewController {
+class HourlyWeatherViewController: RotatableViewController {
     
     private var weather: [WeatherList] = []
     private var hourlyCollectionView = HourlyWeatherCollectionView()
@@ -28,11 +28,12 @@ class HourlyWeatherViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        hourlyCollectionView.frame = view.bounds
+        hourlyCollectionView.frame = container.bounds
     }
     
     private func configureUI() {
         view.backgroundColor = UIColor(hex: Constants.lightBlue)
-        view.addSubview(hourlyCollectionView)
+        container.setGenericContainer(view: view, container: container)
+        container.addSubview(hourlyCollectionView)
     }
 }

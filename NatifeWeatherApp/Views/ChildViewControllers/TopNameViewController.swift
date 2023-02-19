@@ -8,7 +8,7 @@
 import UIKit
 
 class TopNameViewController: RotatableViewController {
-    
+
     private var weather: WeatherList?
 
     private let mapImageView = UIImageView()
@@ -53,3 +53,4 @@ class TopNameViewController: RotatableViewController {
         self.currentDateLabel.text = "December 03, 2023"
     }
 }
+
