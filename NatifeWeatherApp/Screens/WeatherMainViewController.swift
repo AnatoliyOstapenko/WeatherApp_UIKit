@@ -14,8 +14,7 @@ class WeatherMainViewController: UIViewController {
     var coordinator: CoordinatorProtocol?
    
     // MARK: - Private properties
-    private var weather: [WeatherList] = []
-    
+
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
@@ -33,11 +32,29 @@ class WeatherMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        setChildView()
+//        setChildView()
         presenter?.getWeatherByCityName(cityName: cityName)
     }
     
     // MARK: - Private methods
+    private func addChildVC(childVC: UIViewController, containerView: UIView) {
+        addChild(childVC)
+        /// Pass container from superclass to childVC
+        if let childVC = childVC as? TopNameViewController {
+            childVC.coordinator = self.coordinator
+        }
+        containerView.addSubview(childVC.view)
+        childVC.view.frame = containerView.bounds
+        childVC.didMove(toParent: self)
+    }
+    
+    private func setChildView(weather: [WeatherData]) {
+        addChildVC(childVC: TopNameViewController(weather: weather, cityName: cityName), containerView: topNameContainer)
+        addChildVC(childVC: DailyWeatherViewController(weather: weather), containerView: dailyWeatherContainer)
+        addChildVC(childVC: HourlyWeatherViewController(weather: weather), containerView: hourlyWeatherContainer)
+        addChildVC(childVC: ForecastWeatherViewController(weather: weather), containerView: forecastWeatherContainer)
+    }
+    
     private func configureUI() {
         view.backgroundColor = UIColor(hex: Constants.darkBlue)
         /// Set ScrollView for adaptive layout
@@ -53,31 +70,12 @@ class WeatherMainViewController: UIViewController {
         hourlyWeatherContainer.setHourlyWeatherContainer(view: contentView, topcontainer: dailyWeatherContainer, container: hourlyWeatherContainer)
         forecastWeatherContainer.setForecastWeatherContainer(superview: view, view: contentView, topcontainer: hourlyWeatherContainer, container: forecastWeatherContainer)
     }
-    
-    private func addChildVC(childVC: UIViewController, containerView: UIView) {
-        addChild(childVC)
-        /// Pass container from superclass to childVC
-        if let childVC = childVC as? TopNameViewController {
-            childVC.coordinator = self.coordinator
-        }
-        containerView.addSubview(childVC.view)
-        childVC.view.frame = containerView.bounds
-        childVC.didMove(toParent: self)
-    }
-    
-    private func setChildView() {
-        addChildVC(childVC: TopNameViewController(weather: WeatherMockModel.mockWeather), containerView: topNameContainer)
-        addChildVC(childVC: DailyWeatherViewController(weather: WeatherMockModel.mockWeather), containerView: dailyWeatherContainer)
-        addChildVC(childVC: HourlyWeatherViewController(weather: WeatherMockModel.mockWeatherArray), containerView: hourlyWeatherContainer)
-        addChildVC(childVC: ForecastWeatherViewController(weather: WeatherMockModel.mockWeatherArray), containerView: forecastWeatherContainer)
-    }
 }
 
 // MARK: - Update weather
 extension WeatherMainViewController: WeatherViewProtocol {
-    func setWeather(weather: WeatherModel) {
-        self.weather = weather.list
-        print(weather.list)
+    func setWeather(weather: [WeatherData]) {
+        setChildView(weather: weather)
     }
 }
 

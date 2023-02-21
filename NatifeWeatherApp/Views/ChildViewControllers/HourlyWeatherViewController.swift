@@ -9,10 +9,10 @@ import UIKit
 
 class HourlyWeatherViewController: RotatableViewController {
     
-    private var weather: [WeatherList] = []
+    private var weather: [WeatherData] = []
     private var hourlyCollectionView = HourlyWeatherCollectionView()
     
-    init(weather: [WeatherList]) {
+    init(weather: [WeatherData]) {
         super.init(nibName: nil, bundle: nil)
         self.weather = weather
     }

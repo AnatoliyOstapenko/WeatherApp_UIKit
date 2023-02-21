@@ -9,7 +9,7 @@ import UIKit
 
 class DailyWeatherViewController: RotatableViewController {
     
-    private var weather: WeatherList?
+    private var weather: [WeatherData]?
 
     private let weatherImageView = WeatherImageView(frame: .zero)
     private let temperatureContainer = UIView()
@@ -19,7 +19,7 @@ class DailyWeatherViewController: RotatableViewController {
     private let humidityView = DailyIndexesView()
     private let windView = DailyIndexesView()
 
-    init(weather: WeatherList) {
+    init(weather: [WeatherData]) {
         super.init(nibName: nil, bundle: nil)
         self.weather = weather
     }
@@ -54,8 +54,8 @@ class DailyWeatherViewController: RotatableViewController {
     }
     
     private func updateUI() {
-        temperatureView.set(indexImage: .temperature, leftIndexText: "18 C /", rightIndexText: "24 C")
-        humidityView.set(indexImage: .humidity, leftIndexText: "30 %")
-        windView.set(indexImage: .wind, leftIndexText: "30 m/s", rightIndexText: "↖︎")
+        temperatureView.set(indexImage: .temperature, leftIndexText: "\(weather?.first?.tempMin ?? "") /", rightIndexText: "\(weather?.first?.tempMax ?? "")")
+        humidityView.set(indexImage: .humidity, leftIndexText: "\(weather?.first?.humidity ?? "")%")
+        windView.set(indexImage: .wind, leftIndexText: "\(weather?.first?.speed ?? "")m/s", rightIndexText: "\(weather?.first?.deg ?? "")")
     }
 }

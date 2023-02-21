@@ -10,16 +10,17 @@ import UIKit
 class TopNameViewController: RotatableViewController {
 
     var coordinator: CoordinatorProtocol?
-    private var weather: WeatherList?
+    private var weather: [WeatherData]?
 
     private let mapImageView = UIImageView()
     private let locationButton = TopLocationButton()
     private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
     private let currentDateLabel = WeatherLabel(textAlignment: .left, fontSize: 18, weight: .medium)
     
-    init(weather: WeatherList) {
-            super.init(nibName: nil, bundle: nil)
-            self.weather = weather
+    init(weather: [WeatherData], cityName: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.weather = weather
+        self.cityNameLabel.text = cityName.capitalizingFirstLetter()
     }
     
     required init?(coder: NSCoder) {
@@ -46,14 +47,9 @@ class TopNameViewController: RotatableViewController {
         switch action.title {
         case ActionTitle.currentLocation: print("01")
         case ActionTitle.findLocation: print("02")
-        case ActionTitle.findCity: goToCityList()
+        case ActionTitle.findCity: self.coordinator?.goToCityScreen()
         default: break
         }
-    }
-    
-    private func goToCityList() {
-        print("03")
-        self.coordinator?.goToCityScreen()
     }
     
     private func configureUI() {
@@ -71,8 +67,17 @@ class TopNameViewController: RotatableViewController {
     }
     
     private func updateUI() {
-        self.cityNameLabel.text = "Kyiv"
-        self.currentDateLabel.text = "December 03, 2023"
+        self.currentDateLabel.text = self.weather?.first?.date ?? "no date"
+    }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }
 

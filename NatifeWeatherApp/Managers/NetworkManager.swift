@@ -18,14 +18,12 @@ class NetworkManager: NetworkManagerProtocol {
     
     func weatherByLocation(lat: Double, lon: Double, completion: @escaping(Result<WeatherModel, NetworkErrors>) -> Void) {
         let urlString = Constants.baseURLString + Constants.key + "&lat=\(lat)&lon=\(lon)"
-        print(urlString)
         
         request(url: urlString, expecting: WeatherModel.self, completion: completion)
     }
     
     func weatherByCityName(cityName: String, completion: @escaping(Result<WeatherModel, NetworkErrors>) -> Void) {
         let urlString = Constants.baseURLString + Constants.key + "&q=\(cityName.lowercased())"
-        print(urlString)
         
         request(url: urlString, expecting: WeatherModel.self, completion: completion)
     }
@@ -47,7 +45,6 @@ class NetworkManager: NetworkManagerProtocol {
                 completion(.failure(.invalidResponse))
                 return
             }
-            print("Status code of HTTP response: \(response.statusCode)")
             
             guard let data = data else {
                 completion(.failure(.invalidData))

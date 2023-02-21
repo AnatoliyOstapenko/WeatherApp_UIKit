@@ -10,9 +10,9 @@ import UIKit
 class ForecastWeatherViewController: RotatableViewController {
     
     private let tableView = ForecastTableView()
-    private var weather: [WeatherList] = []
+    private var weather: [WeatherData] = []
     
-    init(weather: [WeatherList]) {
+    init(weather: [WeatherData]) {
         super.init(nibName: nil, bundle: nil)
         self.weather = weather
     }
