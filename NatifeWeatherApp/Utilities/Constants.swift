@@ -16,13 +16,22 @@ enum Constants {
     static let cellItemWidth: CGFloat = 70
 }
 
+enum ActionTitle {
+    static let currentLocation  = NSLocalizedString("Поточне розташування", comment: "")
+    static let findLocation = NSLocalizedString("Вибір точки на карті", comment: "")
+    static let findCity = NSLocalizedString("Пошук міста", comment: "")
+}
+
 enum SFSymbols {
-    static let location = UIImage(systemName: "mappin.and.ellipse")
+    static let pin = UIImage(systemName: "mappin.and.ellipse")
     static let map = UIImage(systemName: "map.circle")
     static let sun = UIImage(systemName: "cloud.sun")
     static let temperature = UIImage(systemName: "thermometer.medium")
     static let humidity = UIImage(systemName: "humidity")
     static let wind = UIImage(systemName: "wind")
+    static let glass = UIImage(systemName: "magnifyingglass")
+    static let locationGlass = UIImage(systemName: "location.magnifyingglass")
+    static let location = UIImage(systemName: "location.fill")
 }
 
 /// forecast weather by location

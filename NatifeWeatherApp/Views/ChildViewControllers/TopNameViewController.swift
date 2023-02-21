@@ -9,16 +9,17 @@ import UIKit
 
 class TopNameViewController: RotatableViewController {
 
+    var coordinator: CoordinatorProtocol?
     private var weather: WeatherList?
 
     private let mapImageView = UIImageView()
-    private let locationImageView = UIImageView()
+    private let locationButton = TopLocationButton()
     private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
     private let currentDateLabel = WeatherLabel(textAlignment: .left, fontSize: 18, weight: .medium)
     
     init(weather: WeatherList) {
-        super.init(nibName: nil, bundle: nil)
-        self.weather = weather
+            super.init(nibName: nil, bundle: nil)
+            self.weather = weather
     }
     
     required init?(coder: NSCoder) {
@@ -29,23 +30,44 @@ class TopNameViewController: RotatableViewController {
         super.viewDidLoad()
         configureUI()
         updateUI()
+        setButtonMenu()
+    }
+
+    private func setButtonMenu() {
+        let menu = UIMenu(title: "", children: [
+            UIAction(title: ActionTitle.currentLocation, image: SFSymbols.location, handler: menuHandler),
+            UIAction(title: ActionTitle.findLocation, image: SFSymbols.locationGlass, handler: menuHandler),
+            UIAction(title: ActionTitle.findCity, image: SFSymbols.glass, handler: menuHandler),
+        ])
+        locationButton.menu = menu
+    }
+    
+    private func menuHandler(action: UIAction) {
+        switch action.title {
+        case ActionTitle.currentLocation: print("01")
+        case ActionTitle.findLocation: print("02")
+        case ActionTitle.findCity: goToCityList()
+        default: break
+        }
+    }
+    
+    private func goToCityList() {
+        print("03")
+        self.coordinator?.goToCityScreen()
     }
     
     private func configureUI() {
         /// Set generic container to change constraints when rotating the iPhone
         container.setGenericContainer(view: view, container: container)
-
         /// Set UI  layouts
         mapImageView.setMapImage(view: container, image: mapImageView)
         cityNameLabel.setCityName(view: container, image: mapImageView, label: cityNameLabel)
         currentDateLabel.setCurrentDate(view: container, image: mapImageView, label: currentDateLabel)
-        locationImageView.setLocationImage(view: container, image: locationImageView)
+        locationButton.setLocationButton(view: container, button: locationButton)
         
-        /// Configure UI
+        /// Configure static map view
         mapImageView.tintColor = .white
-        locationImageView.tintColor = .white
         mapImageView.image = SFSymbols.map
-        locationImageView.image = SFSymbols.location
     }
     
     private func updateUI() {

@@ -114,11 +114,10 @@ extension UIView {
         }        
     }
     
-    func setLocationImage(view: UIView, image: UIImageView) {
-        view.addSubview(image)
-        image.tintColor = .label
+    func setLocationButton(view: UIView, button: UIButton) {
+        view.addSubview(button)
         
-        image.snp.makeConstraints { make in
+        button.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(5)
             make.trailing.equalTo(view.snp.trailing).offset(-20)
             make.width.height.equalTo(30)

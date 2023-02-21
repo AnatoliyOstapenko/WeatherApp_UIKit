@@ -24,7 +24,7 @@ class NetworkManager: NetworkManagerProtocol {
     }
     
     func weatherByCityName(cityName: String, completion: @escaping(Result<WeatherModel, NetworkErrors>) -> Void) {
-        let urlString = Constants.baseURLString + Constants.key + "&q=\(cityName)"
+        let urlString = Constants.baseURLString + Constants.key + "&q=\(cityName.lowercased())"
         print(urlString)
         
         request(url: urlString, expecting: WeatherModel.self, completion: completion)
