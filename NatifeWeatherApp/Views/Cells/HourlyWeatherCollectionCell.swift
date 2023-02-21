@@ -30,7 +30,7 @@ class HourlyWeatherCollectionCell: UICollectionViewCell {
     }
     
     func updateCollectionCellUI(weather: WeatherData) {
-        hourLabel.text = weather.date.superscripted
+        hourLabel.text = weather.date.hour + Constants.superscriptZero
         temperatureLabel.text = weather.temp
     }
 }

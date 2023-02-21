@@ -54,8 +54,8 @@ class WeatherPresenter: WeatherPresenterProtocol {
                                                   humidity: String($0.main.humidity),
                                                   tempMin: $0.main.tempMin.temperatured,
                                                   tempMax: $0.main.tempMax.temperatured,
-                                                  speed: String($0.wind.speed),
-                                                  deg: String($0.wind.deg))
+                                                  speed: $0.wind.speed.roundSpeed,
+                                                  deg: $0.wind.deg.directionToSymbol(Double($0.wind.deg)))
                     /// add all data from weather API
                     self.weather.append(weatherData)
                     /// add filtered data day by day for Forecast VC

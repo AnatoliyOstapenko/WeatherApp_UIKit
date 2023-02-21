@@ -56,6 +56,6 @@ class DailyWeatherViewController: RotatableViewController {
     private func updateUI() {
         temperatureView.set(indexImage: .temperature, leftIndexText: "\(weather?.first?.tempMin ?? "") /", rightIndexText: "\(weather?.first?.tempMax ?? "")")
         humidityView.set(indexImage: .humidity, leftIndexText: "\(weather?.first?.humidity ?? "")%")
-        windView.set(indexImage: .wind, leftIndexText: "\(weather?.first?.speed ?? "")m/s", rightIndexText: "\(weather?.first?.deg ?? "")")
+        windView.set(indexImage: .wind, leftIndexText: weather?.first?.speed ?? "", rightIndexText: "\(weather?.first?.deg ?? "")")
     }
 }

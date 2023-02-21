@@ -13,6 +13,7 @@ enum Constants {
     static let baseIconURL = "https://openweathermap.org/img/wn/"
     static let darkBlue = "#4a90e2"
     static let lightBlue = "#5a9ff0"
+    static let superscriptZero = "\u{2070}\u{2070}"
     static let cellItemWidth: CGFloat = 70
 }
 

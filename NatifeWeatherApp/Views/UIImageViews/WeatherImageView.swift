@@ -25,7 +25,8 @@ class WeatherImageView: UIImageView {
         contentMode = .scaleAspectFit
     }
     
-    func setImage(avatar: String?) {
+    func setImage(imageCode: String?) {
+        
 //        NetworkManager.shared.downloadImage(url: avatar ?? ImageNames.placeholder) { [weak self] image in
 //            DispatchQueue.main.async { self?.image = image }
 //        }
