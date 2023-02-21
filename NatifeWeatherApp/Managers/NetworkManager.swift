@@ -28,7 +28,7 @@ class NetworkManager: NetworkManagerProtocol {
         request(url: urlString, expecting: WeatherModel.self, completion: completion)
     }
     
-    private func request<T: Codable>(url: String, expecting: T.Type, completion: @escaping(Result<T, NetworkErrors>) -> Void) {
+    private func request<T: Decodable>(url: String, expecting: T.Type, completion: @escaping(Result<T, NetworkErrors>) -> Void) {
         
         guard let url = URL(string: url) else {
             completion(.failure(.invalidURL))

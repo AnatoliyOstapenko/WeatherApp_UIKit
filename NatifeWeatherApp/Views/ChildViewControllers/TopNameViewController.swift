@@ -67,7 +67,7 @@ class TopNameViewController: RotatableViewController {
     }
     
     private func updateUI() {
-        self.currentDateLabel.text = self.weather?.first?.date ?? "no date"
+        self.currentDateLabel.text = self.weather?.first?.date.topDay ?? "no date"
     }
 }
 

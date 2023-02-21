@@ -48,11 +48,11 @@ class WeatherMainViewController: UIViewController {
         childVC.didMove(toParent: self)
     }
     
-    private func setChildView(weather: [WeatherData]) {
+    private func setChildView(weather: [WeatherData], filteredWeather: [WeatherData]) {
         addChildVC(childVC: TopNameViewController(weather: weather, cityName: cityName), containerView: topNameContainer)
         addChildVC(childVC: DailyWeatherViewController(weather: weather), containerView: dailyWeatherContainer)
         addChildVC(childVC: HourlyWeatherViewController(weather: weather), containerView: hourlyWeatherContainer)
-        addChildVC(childVC: ForecastWeatherViewController(weather: weather), containerView: forecastWeatherContainer)
+        addChildVC(childVC: ForecastWeatherViewController(weather: filteredWeather), containerView: forecastWeatherContainer)
     }
     
     private func configureUI() {
@@ -74,8 +74,8 @@ class WeatherMainViewController: UIViewController {
 
 // MARK: - Update weather
 extension WeatherMainViewController: WeatherViewProtocol {
-    func setWeather(weather: [WeatherData]) {
-        setChildView(weather: weather)
+    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData]) {
+        setChildView(weather: weather, filteredWeather: filteredWeather)
     }
 }
 

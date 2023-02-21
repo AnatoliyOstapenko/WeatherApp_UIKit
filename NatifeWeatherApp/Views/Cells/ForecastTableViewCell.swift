@@ -26,7 +26,7 @@ class ForecastTableViewCell: UITableViewCell {
     }
     
     func updateForecastCell(weather: WeatherData) {
-        dayLabel.text = weather.date
+        dayLabel.text = weather.date.dayOfWeek
         minTempLabel.text = "\(weather.tempMin) "
         maxTempLabel.text = "/ \(weather.tempMax)"
     }
