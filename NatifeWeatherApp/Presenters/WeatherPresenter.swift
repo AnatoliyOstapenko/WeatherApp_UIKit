@@ -63,7 +63,8 @@ class WeatherPresenter: WeatherPresenterProtocol {
                         self.filteredWeather.append(weatherData)
                     }
                 }
-                self.view?.setWeather(weather: self.weather,
+                /// prefix to filter the first 9 elements from the array. delete if you want
+                self.view?.setWeather(weather: Array(self.weather.prefix(9)),
                                       filteredWeather: self.filteredWeather)
                 
             case .failure(let error):

@@ -29,11 +29,12 @@ extension Int {
     var superscripted: String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = "HH"
         let date = Date(timeIntervalSince1970: Double(self))
         let string = dateFormatter.string(from: date)
-        let superscriptZero = "\u{0323}\u{0323}"
-        return string.replacingOccurrences(of: ":", with: ":" + superscriptZero)
+        return string
+//        let superscriptZero = "\u{0323}\u{0323}"
+//        return string.replacingOccurrences(of: ":", with: ":" + superscriptZero)
     }
 }
 
