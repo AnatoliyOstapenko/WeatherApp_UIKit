@@ -9,12 +9,11 @@ import UIKit
 
 class HourlyWeatherViewController: RotatableViewController {
     
-    private var weather: [WeatherData] = []
     private var hourlyCollectionView = HourlyWeatherCollectionView()
     
     init(weather: [WeatherData]) {
         super.init(nibName: nil, bundle: nil)
-        self.weather = weather
+        hourlyCollectionView.updateHourlyCV(weather: weather)
     }
     
     required init?(coder: NSCoder) {
@@ -32,7 +31,7 @@ class HourlyWeatherViewController: RotatableViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = UIColor(hex: Constants.lightBlue)
+        view.backgroundColor = WeatherColor.lightBlue
         container.setGenericContainer(view: view, container: container)
         container.addSubview(hourlyCollectionView)
     }

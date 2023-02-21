@@ -231,12 +231,11 @@ extension UIView {
         view.addSubview(container)
         container.axis = .horizontal
         container.distribution = .fill
-        
+
         container.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
             make.height.equalToSuperview()
-            make.width.equalTo(100)
         }
     }
     
@@ -276,7 +275,7 @@ extension UIStackView {
 extension UIView {
     func addShadow(){
         self.backgroundColor = .white
-        self.layer.shadowColor = UIColor(hex: Constants.darkBlue).cgColor
+        self.layer.shadowColor = WeatherColor.darkBlue.cgColor
         self.layer.shadowOpacity = 0.8
         self.layer.shadowRadius = 5.0
         self.layer.shadowOffset = CGSizeMake(2.0, 2.0)

@@ -9,7 +9,7 @@ import UIKit
 
 class HourlyWeatherCollectionView: UICollectionView {
 
-    private var weather: [WeatherList] = []
+    private var weather: [WeatherData] = []
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -29,18 +29,22 @@ class HourlyWeatherCollectionView: UICollectionView {
         delegate = self
         dataSource = self
     }
+    
+    func updateHourlyCV(weather: [WeatherData]) {
+        self.weather = weather
+    }
 }
 
 // MARK: - Delegate & DataSource
 
 extension HourlyWeatherCollectionView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return weather.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HourlyWeatherCollectionCell.self), for: indexPath) as! HourlyWeatherCollectionCell
-        
+        cell.updateCollectionCellUI(weather: weather[indexPath.row])
         return cell
     }
 }

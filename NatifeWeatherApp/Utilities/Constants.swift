@@ -34,6 +34,11 @@ enum SFSymbols {
     static let location = UIImage(systemName: "location.fill")
 }
 
+enum WeatherColor {
+    static let darkBlue = UIColor(hex: Constants.darkBlue)
+    static let lightBlue = UIColor(hex: Constants.lightBlue)
+}
+
 /// forecast weather by location
 ///https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=d5422e041170c6bebf329350df7140bf&lat=42.3601&lon=71.0589
 

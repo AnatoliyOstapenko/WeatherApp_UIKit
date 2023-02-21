@@ -56,7 +56,7 @@ class WeatherMainViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = UIColor(hex: Constants.darkBlue)
+        view.backgroundColor = WeatherColor.darkBlue
         /// Set ScrollView for adaptive layout
         scrollView.setScrollView(view: view, scrollView: scrollView)
         contentView.setContentView(view: scrollView, content: contentView)

@@ -10,11 +10,10 @@ import UIKit
 class ForecastWeatherViewController: RotatableViewController {
     
     private let tableView = ForecastTableView()
-    private var weather: [WeatherData] = []
     
     init(weather: [WeatherData]) {
         super.init(nibName: nil, bundle: nil)
-        self.weather = weather
+        tableView.updateForecastTV(weather: weather)
     }
     
     required init?(coder: NSCoder) {
@@ -26,14 +25,14 @@ class ForecastWeatherViewController: RotatableViewController {
         configureUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = container.bounds
+    }
+    
     private func configureUI() {
         view.backgroundColor = .white
         container.setGenericContainer(view: view, container: container)
         container.addSubview(tableView)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = container.bounds
     }
 }

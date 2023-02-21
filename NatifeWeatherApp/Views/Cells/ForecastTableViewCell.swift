@@ -25,24 +25,19 @@ class ForecastTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureUI() {
-        dayLabel.text = "Mon"
-        minTempLabel.text = "12 º / "
-        maxTempLabel.text = "18 º"
-        
-        setDayLabel(view: self, label: dayLabel)
-        setWeatherImageView(view: self, imageView: weatherImageView)
-        setTempContainer(view: self, container: tempContainer)
-        tempContainer.addAllSubbviews(minTempLabel, maxTempLabel)
+    func updateForecastCell(weather: WeatherData) {
+        dayLabel.text = weather.date
+        minTempLabel.text = "\(weather.tempMin) "
+        maxTempLabel.text = "/ \(weather.tempMax)"
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        weatherImageView.tintColor = selected ? UIColor(hex: Constants.darkBlue) : .black
-        dayLabel.textColor = selected ? UIColor(hex: Constants.darkBlue) : .black
-        minTempLabel.textColor = selected ? UIColor(hex: Constants.darkBlue) : .black
-        maxTempLabel.textColor = selected ? UIColor(hex: Constants.darkBlue) : .black
+        weatherImageView.tintColor = selected ? WeatherColor.darkBlue : .black
+        dayLabel.textColor = selected ? WeatherColor.darkBlue : .black
+        minTempLabel.textColor = selected ? WeatherColor.darkBlue : .black
+        maxTempLabel.textColor = selected ? WeatherColor.darkBlue : .black
     }
 
     private func handleSelecting() {
@@ -54,6 +49,13 @@ class ForecastTableViewCell: UITableViewCell {
         selectedView.addShadow()
         selectedView.tintColor = .red
         selectedBackgroundView = selectedView
+    }
+    
+    private func configureUI() {
+        setDayLabel(view: self, label: dayLabel)
+        setWeatherImageView(view: self, imageView: weatherImageView)
+        setTempContainer(view: self, container: tempContainer)
+        tempContainer.addAllSubbviews(minTempLabel, maxTempLabel)
     }
 }
 
