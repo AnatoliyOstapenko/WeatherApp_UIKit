@@ -12,6 +12,7 @@ import UIKit
 protocol NetworkManagerProtocol {
     func weatherByLocation(lat: Double, lon: Double, completion: @escaping(Result<WeatherModel, NetworkErrors>) -> Void)
     func weatherByCityName(cityName: String, completion: @escaping(Result<WeatherModel, NetworkErrors>) -> Void)
+    func downloadImage(imageString: String, completion: @escaping(UIImage?) -> Void)
 }
 
 class NetworkManager: NetworkManagerProtocol {
@@ -60,8 +61,8 @@ class NetworkManager: NetworkManagerProtocol {
         task.resume()
     }
     
-    func downloadImage(icon: String, completion: @escaping(UIImage?) -> Void) {
-        let imageURL = Constants.baseIconURL + icon + "@2x.png"
+    func downloadImage(imageString: String, completion: @escaping(UIImage?) -> Void) {
+        let imageURL = Constants.baseIconURL + imageString + "@2x.png"
         guard let url = URL(string: imageURL) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in

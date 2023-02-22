@@ -40,6 +40,7 @@
 		BCC68D1B29A29B0100A2839E /* CitySearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D1A29A29B0100A2839E /* CitySearchBar.swift */; };
 		BCC68D2C29A524A200A2839E /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D2B29A524A200A2839E /* WeatherData.swift */; };
 		BCC68D2E29A53BAA00A2839E /* BaseTypes+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D2D29A53BAA00A2839E /* BaseTypes+Ext.swift */; };
+		BCCF6E8629A637A2009A6CC1 /* ImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */; };
 		DA2BE0DEDBE5E5506B392030 /* Pods_NatifeWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5882D76B1F5D2441127BB1B /* Pods_NatifeWeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		BCC68D1A29A29B0100A2839E /* CitySearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchBar.swift; sourceTree = "<group>"; };
 		BCC68D2B29A524A200A2839E /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		BCC68D2D29A53BAA00A2839E /* BaseTypes+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseTypes+Ext.swift"; sourceTree = "<group>"; };
+		BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresenter.swift; sourceTree = "<group>"; };
 		CB10C958D77849A9ACC74AD9 /* Pods-NatifeWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatifeWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-NatifeWeatherApp/Pods-NatifeWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				BCB3063E2997C2E70088ADBC /* WeatherPresenter.swift */,
+				BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				BC3126F4299E4E1900DD5FD0 /* HourlyWeatherViewController.swift in Sources */,
 				BCB3064929991E2F0088ADBC /* UIView+Ext.swift in Sources */,
 				BCC68D1729A2970300A2839E /* CityTableViewCell.swift in Sources */,
+				BCCF6E8629A637A2009A6CC1 /* ImagePresenter.swift in Sources */,
 				BCC68D1929A2985100A2839E /* CityTableView.swift in Sources */,
 				BCB306632999548A0088ADBC /* DailyIndexesView.swift in Sources */,
 				BCB306272997BE550088ADBC /* AppDelegate.swift in Sources */,

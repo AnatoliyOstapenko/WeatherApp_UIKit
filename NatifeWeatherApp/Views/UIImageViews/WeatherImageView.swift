@@ -9,6 +9,8 @@ import UIKit
 
 class WeatherImageView: UIImageView {
     
+    lazy var presenter = ImagePresenter(view: self, networkManager: NetworkManager())
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -21,15 +23,20 @@ class WeatherImageView: UIImageView {
     private func configure() {
         image = UIImage(systemName: "cloud.sun")
         tintColor = .white
-        clipsToBounds = true
+        backgroundColor = .systemPink
         contentMode = .scaleAspectFit
     }
     
-    func setImage(imageCode: String?) {
-        
-//        NetworkManager.shared.downloadImage(url: avatar ?? ImageNames.placeholder) { [weak self] image in
-//            DispatchQueue.main.async { self?.image = image }
-//        }
+    func passImageString(imageString: String?) {
+        presenter.getImage(imageString: imageString ?? "")
     }
 
+}
+
+extension WeatherImageView: ImageViewProtocol {
+    func setImage(image: UIImage) {
+        self.image = image
+    }
+    
+    
 }

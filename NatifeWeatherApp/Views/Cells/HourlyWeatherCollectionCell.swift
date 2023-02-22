@@ -32,5 +32,6 @@ class HourlyWeatherCollectionCell: UICollectionViewCell {
     func updateCollectionCellUI(weather: WeatherData) {
         hourLabel.text = weather.date.hour + Constants.superscriptZero
         temperatureLabel.text = weather.temp
+        weatherImage.passImageString(imageString: weather.icon)
     }
 }

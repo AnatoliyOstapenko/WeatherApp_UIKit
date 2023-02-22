@@ -10,6 +10,7 @@ import UIKit
 class DailyWeatherViewController: RotatableViewController {
     
     private var weather: [WeatherData]?
+    lazy var presenter = ImagePresenter(view: self, networkManager: NetworkManager())
 
     private let weatherImageView = WeatherImageView(frame: .zero)
     private let temperatureContainer = UIView()
@@ -32,6 +33,7 @@ class DailyWeatherViewController: RotatableViewController {
         super.viewDidLoad()
         configureUI()
         updateUI()
+        presenter.getImage(imageString: weather?.first?.icon ?? "")
     }
     
     private func configureUI() {
@@ -57,5 +59,11 @@ class DailyWeatherViewController: RotatableViewController {
         temperatureView.set(indexImage: .temperature, leftIndexText: "\(weather?.first?.tempMin ?? "") /", rightIndexText: "\(weather?.first?.tempMax ?? "")")
         humidityView.set(indexImage: .humidity, leftIndexText: "\(weather?.first?.humidity ?? "")%")
         windView.set(indexImage: .wind, leftIndexText: weather?.first?.speed ?? "", rightIndexText: "\(weather?.first?.deg ?? "")")
+    }
+}
+
+extension DailyWeatherViewController: ImageViewProtocol {
+    func setImage(image: UIImage) {
+        weatherImageView.image = image
     }
 }
