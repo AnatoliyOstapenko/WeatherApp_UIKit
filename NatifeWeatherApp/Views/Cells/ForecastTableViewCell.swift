@@ -25,10 +25,11 @@ class ForecastTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateForecastCell(weather: WeatherData) {
+    func updateForecastCell(weather: WeatherData, icon: String) {
         dayLabel.text = weather.date.dayOfWeek
         minTempLabel.text = "\(weather.tempMin) "
         maxTempLabel.text = "/ \(weather.tempMax)"
+        weatherImageView.getIcon(imageString: icon)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

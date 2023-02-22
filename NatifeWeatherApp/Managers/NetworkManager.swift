@@ -62,7 +62,7 @@ class NetworkManager: NetworkManagerProtocol {
     }
     
     func downloadImage(imageString: String, completion: @escaping(UIImage?) -> Void) {
-        let imageURL = Constants.baseIconURL + imageString + "@2x.png"
+        let imageURL = Constants.baseIconURL + imageString + "@4x.png"
         guard let url = URL(string: imageURL) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in

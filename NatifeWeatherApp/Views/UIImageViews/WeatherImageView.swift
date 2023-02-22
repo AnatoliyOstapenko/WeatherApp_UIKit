@@ -23,20 +23,16 @@ class WeatherImageView: UIImageView {
     private func configure() {
         image = UIImage(systemName: "cloud.sun")
         tintColor = .white
-        backgroundColor = .systemPink
-        contentMode = .scaleAspectFit
+        contentMode = .scaleAspectFill
     }
     
-    func passImageString(imageString: String?) {
+    func getIcon(imageString: String?) {
         presenter.getImage(imageString: imageString ?? "")
     }
-
 }
 
 extension WeatherImageView: ImageViewProtocol {
     func setImage(image: UIImage) {
         self.image = image
     }
-    
-    
 }

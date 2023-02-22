@@ -212,7 +212,7 @@ extension UIView {
         }
     }
     
-    func setBottomContainer(view: UIView, container: UIStackView) {
+    func setBottomContainer(view: UIView, container: UIStackView, image: UIImageView) {
         view.addSubview(container)
         container.axis = .vertical
         container.distribution = .fill
@@ -222,6 +222,10 @@ extension UIView {
             make.bottom.equalTo(view.snp.bottom).offset(-25)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
+        }
+        
+        image.snp.makeConstraints { make in
+            make.width.height.equalTo(30)
         }
     }
     

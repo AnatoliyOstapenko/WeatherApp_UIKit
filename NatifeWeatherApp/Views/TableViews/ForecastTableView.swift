@@ -40,7 +40,8 @@ extension ForecastTableView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ForecastTableViewCell.self), for: indexPath) as! ForecastTableViewCell
-        cell.updateForecastCell(weather: weather[indexPath.row])
+        cell.updateForecastCell(weather: weather[indexPath.row],
+                                icon: weather[indexPath.row].icon)
         return cell
     }
     

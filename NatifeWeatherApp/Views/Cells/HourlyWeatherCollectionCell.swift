@@ -25,13 +25,13 @@ class HourlyWeatherCollectionCell: UICollectionViewCell {
     
     private func configureUI() {
         setHourLabel(view: self, label: hourLabel)
-        setBottomContainer(view: self, container: bottomContainer)
+        setBottomContainer(view: self, container: bottomContainer, image: weatherImage)
         bottomContainer.addAllSubbviews(weatherImage, temperatureLabel)
     }
     
     func updateCollectionCellUI(weather: WeatherData) {
         hourLabel.text = weather.date.hour + Constants.superscriptZero
         temperatureLabel.text = weather.temp
-        weatherImage.passImageString(imageString: weather.icon)
+        weatherImage.getIcon(imageString: weather.icon)
     }
 }
