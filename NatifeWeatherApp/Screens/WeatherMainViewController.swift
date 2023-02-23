@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherMainViewController: UIViewController {
     
@@ -22,19 +23,15 @@ class WeatherMainViewController: UIViewController {
     private let dailyWeatherContainer = UIView()
     private let hourlyWeatherContainer = UIView()
     private let forecastWeatherContainer = UIView()
+    private let locationManager = CLLocationManager()
     
-    ///Mock data for debugging
-    let cityName = "Lviv Railway Station"
-    let lat: Double = 49.83989913759544
-    let lon: Double = 23.99365782737732
+    var cityName = ""
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-//        setChildView()
-//        presenter?.getWeatherByCityName(cityName: cityName)
-        presenter?.getWeatherByLocation(lat: lat, lon: lon)
+        setInitialLocation()
     }
     
     // MARK: - Private methods
@@ -49,11 +46,17 @@ class WeatherMainViewController: UIViewController {
         childVC.didMove(toParent: self)
     }
     
-    private func setChildView(weather: [WeatherData], filteredWeather: [WeatherData]) {
-        addChildVC(childVC: TopNameViewController(weather: weather, cityName: cityName), containerView: topNameContainer)
+    private func setChildView(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
+        addChildVC(childVC: TopNameViewController(weather: weather, cityName: city), containerView: topNameContainer)
         addChildVC(childVC: DailyWeatherViewController(weather: weather), containerView: dailyWeatherContainer)
         addChildVC(childVC: HourlyWeatherViewController(weather: weather), containerView: hourlyWeatherContainer)
         addChildVC(childVC: ForecastWeatherViewController(weather: filteredWeather), containerView: forecastWeatherContainer)
+    }
+    
+    private func setInitialLocation() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
     }
     
     private func configureUI() {
@@ -75,8 +78,23 @@ class WeatherMainViewController: UIViewController {
 
 // MARK: - Update weather
 extension WeatherMainViewController: WeatherViewProtocol {
-    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData]) {
-        setChildView(weather: weather, filteredWeather: filteredWeather)
+    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
+        setChildView(weather: weather, filteredWeather: filteredWeather, city: city)
+    }
+}
+// MARK: - CLLocationManagerDelegate
+extension WeatherMainViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last, location.horizontalAccuracy > 0 else { return }
+        locationManager.stopUpdatingLocation()
+        let lon = Double(location.coordinate.longitude)
+        let lat = Double(location.coordinate.latitude)
+        /// Initial location
+        presenter?.getWeatherByLocation(lat: lat, lon: lon)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("location update failed, \(error) ")
     }
 }
 

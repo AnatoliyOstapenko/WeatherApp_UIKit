@@ -8,7 +8,7 @@
 import UIKit
 
 protocol WeatherViewProtocol: AnyObject {
-    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData])
+    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData], city: String)
 }
 
 protocol WeatherPresenterProtocol: AnyObject {
@@ -65,7 +65,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
                 }
                 /// prefix to filter the first 9 elements from the array. delete if you want
                 self.view?.setWeather(weather: Array(self.weather.prefix(9)),
-                                      filteredWeather: self.filteredWeather)
+                                      filteredWeather: self.filteredWeather, city: weather.city.name)
                 
             case .failure(let error):
                 print(String(describing: error.hashValue))

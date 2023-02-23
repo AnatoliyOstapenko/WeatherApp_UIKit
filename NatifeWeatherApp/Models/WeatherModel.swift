@@ -9,6 +9,7 @@ import Foundation
 
 struct WeatherModel: Decodable {
     let list: [WeatherList]
+    let city: City
 }
 
 struct WeatherList: Decodable {
@@ -21,6 +22,10 @@ struct WeatherList: Decodable {
         case main, weather, wind
         case date = "dt"
     }
+}
+
+struct City: Decodable {
+    let name: String
 }
 
 struct Main: Decodable {

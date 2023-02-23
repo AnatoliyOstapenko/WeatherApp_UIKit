@@ -45,7 +45,7 @@ class TopNameViewController: RotatableViewController {
     
     private func menuHandler(action: UIAction) {
         switch action.title {
-        case ActionTitle.currentLocation: print("01")
+        case ActionTitle.currentLocation: print("01")//self.locationManager.requestLocation()
         case ActionTitle.findLocation: print("02")
         case ActionTitle.findCity: self.coordinator?.createMapView()
         default: break
@@ -71,13 +71,6 @@ class TopNameViewController: RotatableViewController {
     }
 }
 
-extension String {
-    func capitalizingFirstLetter() -> String {
-        return prefix(1).capitalized + dropFirst()
-    }
 
-    mutating func capitalizeFirstLetter() {
-        self = self.capitalizingFirstLetter()
-    }
-}
+
 

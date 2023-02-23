@@ -39,20 +39,3 @@ enum WeatherColor {
     static let darkBlue = UIColor(hex: Constants.darkBlue)
     static let lightBlue = UIColor(hex: Constants.lightBlue)
 }
-
-/// forecast weather by location
-///https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=d5422e041170c6bebf329350df7140bf&lat=42.3601&lon=71.0589
-
-
-/// forecast weather by city name
-///https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=d5422e041170c6bebf329350df7140bf&q=kyiv
-
-struct WeatherMockModel {
-    static let mockWeather = WeatherList(main: Main(temp: 0, humidity: 0, tempMin: 0, tempMax: 0),
-                                  weather: [Weather(icon: "Foo")],
-                                  date: 0,
-                                  wind: Wind(speed: 1, deg: 2))
-    
-    static let mockWeatherArray = Array(repeating: mockWeather, count: 3)
-    
-}

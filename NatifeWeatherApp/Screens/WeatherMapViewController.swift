@@ -8,9 +8,14 @@
 import UIKit
 import MapKit
 
+protocol MapDataProtocol: AnyObject {
+    func getCoordinate(latitude: Double, longitude: Double)
+}
+
 class WeatherMapViewController: UIViewController {
     
     var coordinator: CoordinatorProtocol?
+    weak var delegate: MapDataProtocol?
     
     private let mapView = MKMapView()
     private let tableView = UITableView()
@@ -25,28 +30,23 @@ class WeatherMapViewController: UIViewController {
     }
 
     private func configureUI() {
+        /// Initial settings
         view.backgroundColor = WeatherColor.darkBlue
-        view.addSubview(mapView)
-        view.addSubview(tableView)
         tableView.backgroundColor = .white
         tableView.isHidden = true
+        /// Layouts
+        mapView.setWeatherMapElements(view: view, subView: mapView)
+        tableView.setWeatherMapElements(view: view, subView: tableView)
+        /// Delegates
         tableView.delegate = self
         tableView.dataSource = self
         completer.delegate = self
-        
-        mapView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
+        mapView.delegate = self
     }
     
     @objc private func searchButtonPressed() {
-        
+        tableView.isHidden = false
+        tableView.reloadData()
     }
     
     /// Configure the search controller
@@ -62,7 +62,7 @@ class WeatherMapViewController: UIViewController {
         searchController.searchBar.searchTextField.clearButtonMode = .never
         searchController.searchBar.searchTextField.leftViewMode = .never
         searchController.searchBar.showsCancelButton = false
-
+        /// configure navigation controller
         navigationItem.titleView = searchController.searchBar
         navigationItem.hidesSearchBarWhenScrolling = false
         /// color bar buttons
@@ -71,6 +71,14 @@ class WeatherMapViewController: UIViewController {
         /// Add search bar button:
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
         navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    func addPinToMap(title: String, subtitle: String, coordinate: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.title = title
+        annotation.subtitle = subtitle
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
     }
 }
 
@@ -92,11 +100,12 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    // MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let completion = searchResults[indexPath.row]
         completer.queryFragment = completion.title
+        print("City name: \(completion.title)")
         searchController.searchBar.text = completion.title
         tableView.isHidden = true
         searchController.dismiss(animated: true, completion: nil)
@@ -104,8 +113,10 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
         let request = MKLocalSearch.Request(completion: completion)
         let search = MKLocalSearch(request: request)
         search.start { response, error in
+            print(response.hashValue)
             if let placemark = response?.mapItems.first?.placemark {
                 let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                self.addPinToMap(title: "Title", subtitle: "Subtitle", coordinate: region.center)
                 print("REGION - latitude:\(region.center.latitude) - longitude:\(region.center.longitude)")
                 self.mapView.setRegion(region, animated: true)
             }
@@ -117,10 +128,12 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WeatherMapViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        tableView.isHidden = false
+        tableView.reloadData()
         let query = searchController.searchBar.text ?? "" /// when you tap on searchBar
-        print("SearchResults: \(query)")
         completer.queryFragment = query
     }
+    
 }
 
 // MARK: - MKLocalSearchCompleterDelegate
@@ -131,8 +144,13 @@ extension WeatherMapViewController: MKLocalSearchCompleterDelegate {
         tableView.reloadData()
         tableView.isHidden = searchResults.isEmpty
     }
-    
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print("Autocomplete error: \(error.localizedDescription)") /// when tap on cancel and the cross
-    }
 }
+
+// MARK: - MKMapViewDelegate
+
+extension WeatherMapViewController: MKMapViewDelegate {
+    
+}
+
+
+
