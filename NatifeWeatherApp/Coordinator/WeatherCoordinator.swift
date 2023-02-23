@@ -10,7 +10,7 @@ import UIKit
 protocol CoordinatorProtocol {
     var navController: UINavigationController { get set }
     func start()
-    func goToCityScreen()
+    func createMapView()
 }
 
 class WeatherCoordinator: CoordinatorProtocol {
@@ -27,8 +27,8 @@ class WeatherCoordinator: CoordinatorProtocol {
         navController.pushViewController(view, animated: true)
     }
     
-    func goToCityScreen() {
-        let view = CityListViewController()
+    func createMapView() {
+        let view = WeatherMapViewController()
         view.coordinator = self
         navController.pushViewController(view, animated: true)
     }

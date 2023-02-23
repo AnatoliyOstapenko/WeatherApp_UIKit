@@ -34,13 +34,14 @@
 		BCB3065B29994A410088ADBC /* WeatherImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB3065A29994A410088ADBC /* WeatherImageView.swift */; };
 		BCB30661299950E10088ADBC /* DailyWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB30660299950E10088ADBC /* DailyWeatherViewController.swift */; };
 		BCB306632999548A0088ADBC /* DailyIndexesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB306622999548A0088ADBC /* DailyIndexesView.swift */; };
-		BCC68D1529A28FC200A2839E /* CityTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D1429A28FC200A2839E /* CityTextField.swift */; };
 		BCC68D1729A2970300A2839E /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D1629A2970300A2839E /* CityTableViewCell.swift */; };
 		BCC68D1929A2985100A2839E /* CityTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D1829A2985100A2839E /* CityTableView.swift */; };
 		BCC68D1B29A29B0100A2839E /* CitySearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D1A29A29B0100A2839E /* CitySearchBar.swift */; };
 		BCC68D2C29A524A200A2839E /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D2B29A524A200A2839E /* WeatherData.swift */; };
 		BCC68D2E29A53BAA00A2839E /* BaseTypes+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC68D2D29A53BAA00A2839E /* BaseTypes+Ext.swift */; };
 		BCCF6E8629A637A2009A6CC1 /* ImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */; };
+		BCCF6E8829A66E18009A6CC1 /* WeatherMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8729A66E18009A6CC1 /* WeatherMapViewController.swift */; };
+		BCCF6E8A29A68803009A6CC1 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8929A68803009A6CC1 /* ResultViewController.swift */; };
 		DA2BE0DEDBE5E5506B392030 /* Pods_NatifeWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5882D76B1F5D2441127BB1B /* Pods_NatifeWeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,13 +77,14 @@
 		BCB3065A29994A410088ADBC /* WeatherImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImageView.swift; sourceTree = "<group>"; };
 		BCB30660299950E10088ADBC /* DailyWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherViewController.swift; sourceTree = "<group>"; };
 		BCB306622999548A0088ADBC /* DailyIndexesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyIndexesView.swift; sourceTree = "<group>"; };
-		BCC68D1429A28FC200A2839E /* CityTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTextField.swift; sourceTree = "<group>"; };
 		BCC68D1629A2970300A2839E /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		BCC68D1829A2985100A2839E /* CityTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableView.swift; sourceTree = "<group>"; };
 		BCC68D1A29A29B0100A2839E /* CitySearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchBar.swift; sourceTree = "<group>"; };
 		BCC68D2B29A524A200A2839E /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		BCC68D2D29A53BAA00A2839E /* BaseTypes+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseTypes+Ext.swift"; sourceTree = "<group>"; };
 		BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresenter.swift; sourceTree = "<group>"; };
+		BCCF6E8729A66E18009A6CC1 /* WeatherMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMapViewController.swift; sourceTree = "<group>"; };
+		BCCF6E8929A68803009A6CC1 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		CB10C958D77849A9ACC74AD9 /* Pods-NatifeWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatifeWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-NatifeWeatherApp/Pods-NatifeWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				BC31273029A2423000DD5FD0 /* RotatableViewController.swift */,
+				BCCF6E8929A68803009A6CC1 /* ResultViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			children = (
 				BCB3062A2997BE550088ADBC /* WeatherMainViewController.swift */,
 				BC31273629A2767100DD5FD0 /* CityListViewController.swift */,
+				BCCF6E8729A66E18009A6CC1 /* WeatherMapViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -252,7 +256,6 @@
 				BC31272929A11A8300DD5FD0 /* TableViews */,
 				BC31273229A256AF00DD5FD0 /* ViewControllers */,
 				BC31273529A260FB00DD5FD0 /* Buttons */,
-				BCC68D1429A28FC200A2839E /* CityTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -464,9 +467,10 @@
 				BCB306412997C34F0088ADBC /* WeatherModel.swift in Sources */,
 				BCB3063D2997C22F0088ADBC /* WeatherCoordinator.swift in Sources */,
 				BCB30661299950E10088ADBC /* DailyWeatherViewController.swift in Sources */,
+				BCCF6E8829A66E18009A6CC1 /* WeatherMapViewController.swift in Sources */,
 				BCB306552999368F0088ADBC /* UIColor+Ext.swift in Sources */,
+				BCCF6E8A29A68803009A6CC1 /* ResultViewController.swift in Sources */,
 				BC31273429A2596500DD5FD0 /* TopLocationButton.swift in Sources */,
-				BCC68D1529A28FC200A2839E /* CityTextField.swift in Sources */,
 				BCC68D1B29A29B0100A2839E /* CitySearchBar.swift in Sources */,
 				BC31272829A119B200DD5FD0 /* ForecastTableView.swift in Sources */,
 				BCB3064B299925880088ADBC /* TopNameViewController.swift in Sources */,
