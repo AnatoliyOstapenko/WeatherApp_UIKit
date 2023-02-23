@@ -29,9 +29,9 @@ class DailyIndexesView: UIView {
     
     private func configure() {
         dailyIndexesContainer.setDailyIndexesContainer(view: self, container: dailyIndexesContainer)
-        dailyIndexesContainer.addAllSubbviews(symbolImageView, labelContainerView)
+        dailyIndexesContainer.addAllSubviews(symbolImageView, labelContainerView)
         labelContainerView.setLabelContainerView(container: labelContainerView)
-        labelContainerView.addAllSubbviews(leftIndexLabel, rightIndexLabel, paddingView)
+        labelContainerView.addAllSubviews(leftIndexLabel, rightIndexLabel, paddingView)
 
         symbolImageView.tintColor = .white
         symbolImageView.contentMode = .center

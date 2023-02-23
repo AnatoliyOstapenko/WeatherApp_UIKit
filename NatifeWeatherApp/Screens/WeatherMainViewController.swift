@@ -24,16 +24,17 @@ class WeatherMainViewController: UIViewController {
     private let forecastWeatherContainer = UIView()
     
     ///Mock data for debugging
-    let cityName = "london"
-    let lat = "54.687157"
-    let lon = "25.279652"
+    let cityName = "Lviv Railway Station"
+    let lat: Double = 49.83989913759544
+    let lon: Double = 23.99365782737732
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
 //        setChildView()
-        presenter?.getWeatherByCityName(cityName: cityName)
+//        presenter?.getWeatherByCityName(cityName: cityName)
+        presenter?.getWeatherByLocation(lat: lat, lon: lon)
     }
     
     // MARK: - Private methods

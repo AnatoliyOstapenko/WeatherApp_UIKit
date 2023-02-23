@@ -30,6 +30,7 @@ class WeatherCoordinator: CoordinatorProtocol {
     func createMapView() {
         let view = WeatherMapViewController()
         view.coordinator = self
+        navController.navigationBar.topItem?.backButtonTitle = "" /// delete "back" title
         navController.pushViewController(view, animated: true)
     }
 }

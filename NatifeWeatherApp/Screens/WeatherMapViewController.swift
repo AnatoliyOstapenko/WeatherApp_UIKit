@@ -8,70 +8,84 @@
 import UIKit
 import MapKit
 
-class WeatherMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, MKLocalSearchCompleterDelegate {
+class WeatherMapViewController: UIViewController {
     
     var coordinator: CoordinatorProtocol?
     
-    let mapView = MKMapView()
-    let tableView = UITableView()
-    let searchController = UISearchController(searchResultsController: nil)
-    let completer = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompletion]()
+    private let mapView = MKMapView()
+    private let tableView = UITableView()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let completer = MKLocalSearchCompleter()
+    private var searchResults: [MKLocalSearchCompletion] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Add the map view
-        mapView.frame = view.bounds
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        configureUI()
+        setSearchController()
+    }
+
+    private func configureUI() {
+        view.backgroundColor = WeatherColor.darkBlue
         view.addSubview(mapView)
-        
-        // Add the table view
-        tableView.frame = view.bounds
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(tableView)
+        tableView.backgroundColor = .white
         tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
-        view.addSubview(tableView)
+        completer.delegate = self
         
-        // Configure the search controller
+        mapView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    @objc private func searchButtonPressed() {
+        
+    }
+    
+    /// Configure the search controller
+    private func setSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search for a place"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+        searchController.searchBar.backgroundColor = WeatherColor.darkBlue
+        /// configure Search TextField
+        searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.searchTextField.textColor = .black
+        searchController.searchBar.searchTextField.clearButtonMode = .never
+        searchController.searchBar.searchTextField.leftViewMode = .never
+        searchController.searchBar.showsCancelButton = false
+
+        navigationItem.titleView = searchController.searchBar
+        navigationItem.hidesSearchBarWhenScrolling = false
+        /// color bar buttons
+        navigationController?.navigationBar.tintColor = .white
         
-        // Configure the completer
-        completer.delegate = self
+        /// Add search bar button:
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
+        navigationItem.rightBarButtonItem = searchButton
     }
-    
-    // MARK: - UISearchResultsUpdating
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        let query = searchController.searchBar.text ?? ""
-        completer.queryFragment = query
-    }
-    
-    // MARK: - MKLocalSearchCompleterDelegate
-    
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchResults = completer.results /// when you start typing
-        tableView.reloadData()
-        tableView.isHidden = searchResults.isEmpty
-    }
-    
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print("Autocomplete error: \(error.localizedDescription)") /// when tap on cancel and the cross
-    }
-    
-    // MARK: - UITableViewDataSource
-    
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.backgroundColor = .white
+        cell.textLabel?.textColor = .black
+        cell.detailTextLabel?.textColor = .black
         let completion = searchResults[indexPath.row]
         cell.textLabel?.text = completion.title
         cell.detailTextLabel?.text = completion.subtitle
@@ -92,8 +106,33 @@ class WeatherMapViewController: UIViewController, UITableViewDelegate, UITableVi
         search.start { response, error in
             if let placemark = response?.mapItems.first?.placemark {
                 let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                print("REGION - latitude:\(region.center.latitude) - longitude:\(region.center.longitude)")
                 self.mapView.setRegion(region, animated: true)
             }
         }
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension WeatherMapViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let query = searchController.searchBar.text ?? "" /// when you tap on searchBar
+        print("SearchResults: \(query)")
+        completer.queryFragment = query
+    }
+}
+
+// MARK: - MKLocalSearchCompleterDelegate
+
+extension WeatherMapViewController: MKLocalSearchCompleterDelegate {
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results /// when you start typing
+        tableView.reloadData()
+        tableView.isHidden = searchResults.isEmpty
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print("Autocomplete error: \(error.localizedDescription)") /// when tap on cancel and the cross
     }
 }

@@ -30,7 +30,7 @@ class WeatherLabel: UILabel {
     
     private func configure() {
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.9
+        minimumScaleFactor = 0.3
         lineBreakMode = .byTruncatingTail
     }
 

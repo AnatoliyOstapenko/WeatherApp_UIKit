@@ -56,7 +56,7 @@ class ForecastTableViewCell: UITableViewCell {
         setDayLabel(view: self, label: dayLabel)
         setWeatherImageView(view: self, imageView: weatherImageView)
         setTempContainer(view: self, container: tempContainer)
-        tempContainer.addAllSubbviews(minTempLabel, maxTempLabel)
+        tempContainer.addAllSubviews(minTempLabel, maxTempLabel)
     }
 }
 

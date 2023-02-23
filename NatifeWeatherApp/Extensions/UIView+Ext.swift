@@ -225,7 +225,7 @@ extension UIView {
         }
         
         image.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
+            make.height.equalTo(30)
         }
     }
     
@@ -264,12 +264,23 @@ extension UIView {
             make.width.equalTo(30)
         }
     }
+    
+    // MARK: - WeatherMapViewController Layout
+    
+    func setWeatherMapElements(view: UIView, subView: UIView) {
+        view.addSubview(subView)
+        
+        subView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
 }
 
 // MARK: - Add views to StackView at the same time
 
 extension UIStackView {
-    func addAllSubbviews(_ views: UIView...) {
+    func addAllSubviews(_ views: UIView...) {
         views.forEach { addArrangedSubview($0) }
     }
 }
