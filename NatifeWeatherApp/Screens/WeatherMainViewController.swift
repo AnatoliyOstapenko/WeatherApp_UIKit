@@ -79,6 +79,7 @@ class WeatherMainViewController: UIViewController {
 // MARK: - Update weather
 extension WeatherMainViewController: WeatherViewProtocol {
     func setWeather(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
+        print("WEATHER city: \(city), weather: \(weather.first?.temp)")
         setChildView(weather: weather, filteredWeather: filteredWeather, city: city)
     }
 }

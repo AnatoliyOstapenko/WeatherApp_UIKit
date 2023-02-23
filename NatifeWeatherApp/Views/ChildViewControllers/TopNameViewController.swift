@@ -47,7 +47,7 @@ class TopNameViewController: RotatableViewController {
         switch action.title {
         case ActionTitle.currentLocation: print("01")//self.locationManager.requestLocation()
         case ActionTitle.findLocation: print("02")
-        case ActionTitle.findCity: self.coordinator?.createMapView()
+        case ActionTitle.findCity: coordinator?.createMapView()
         default: break
         }
     }

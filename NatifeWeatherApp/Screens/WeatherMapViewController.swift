@@ -8,14 +8,10 @@
 import UIKit
 import MapKit
 
-protocol MapDataProtocol: AnyObject {
-    func getCoordinate(latitude: Double, longitude: Double)
-}
-
 class WeatherMapViewController: UIViewController {
     
     var coordinator: CoordinatorProtocol?
-    weak var delegate: MapDataProtocol?
+    lazy var presenter = WeatherPresenter(view: self, networkManager: NetworkManager())
     
     private let mapView = MKMapView()
     private let tableView = UITableView()
@@ -41,7 +37,6 @@ class WeatherMapViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         completer.delegate = self
-        mapView.delegate = self
     }
     
     @objc private func searchButtonPressed() {
@@ -73,11 +68,11 @@ class WeatherMapViewController: UIViewController {
         navigationItem.rightBarButtonItem = searchButton
     }
     
-    func addPinToMap(title: String, subtitle: String, coordinate: CLLocationCoordinate2D) {
+    private func addPinToMap(coordinate: CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation()
-        annotation.title = title
-        annotation.subtitle = subtitle
+        annotation.title = completer.queryFragment
         annotation.coordinate = coordinate
+        presenter.getWeatherByLocation(lat: coordinate.latitude, lon: coordinate.longitude)
         mapView.addAnnotation(annotation)
     }
 }
@@ -105,7 +100,6 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let completion = searchResults[indexPath.row]
         completer.queryFragment = completion.title
-        print("City name: \(completion.title)")
         searchController.searchBar.text = completion.title
         tableView.isHidden = true
         searchController.dismiss(animated: true, completion: nil)
@@ -116,8 +110,7 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
             print(response.hashValue)
             if let placemark = response?.mapItems.first?.placemark {
                 let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                self.addPinToMap(title: "Title", subtitle: "Subtitle", coordinate: region.center)
-                print("REGION - latitude:\(region.center.latitude) - longitude:\(region.center.longitude)")
+                self.addPinToMap(coordinate: region.center)
                 self.mapView.setRegion(region, animated: true)
             }
         }
@@ -146,10 +139,9 @@ extension WeatherMapViewController: MKLocalSearchCompleterDelegate {
     }
 }
 
-// MARK: - MKMapViewDelegate
-
-extension WeatherMapViewController: MKMapViewDelegate {
-    
+extension WeatherMapViewController: WeatherViewProtocol {
+    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
+    }
 }
 
 

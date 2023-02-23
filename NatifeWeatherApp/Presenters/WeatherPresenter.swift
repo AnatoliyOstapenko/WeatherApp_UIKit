@@ -64,6 +64,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
                     }
                 }
                 /// prefix to filter the first 9 elements from the array. delete if you want
+                print("City name: \(weather.city.name)")
                 self.view?.setWeather(weather: Array(self.weather.prefix(9)),
                                       filteredWeather: self.filteredWeather, city: weather.city.name)
                 
