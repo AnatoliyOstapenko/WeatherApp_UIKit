@@ -275,6 +275,16 @@ extension UIView {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    func setMapButton(view: UIView, button: UIButton) {
+        view.addSubview(button)
+        
+        button.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.width.height.equalTo(30)
+        }
+    }
 }
 
 // MARK: - Add views to StackView at the same time

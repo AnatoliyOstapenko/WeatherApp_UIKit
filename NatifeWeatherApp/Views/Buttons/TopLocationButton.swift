@@ -18,9 +18,13 @@ class TopLocationButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    convenience init(image: UIImage?) {
+        self.init(frame: .zero)
+        configuration?.image = image
+    }
+    
     private func configureUI() {
         configuration = UIButton.Configuration.plain()
-        configuration?.image = SFSymbols.pin
         configuration?.buttonSize = .large
         tintColor = .white
         showsMenuAsPrimaryAction = true

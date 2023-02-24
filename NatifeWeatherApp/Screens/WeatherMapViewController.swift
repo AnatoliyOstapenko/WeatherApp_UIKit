@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 protocol MapCoordinatesProtocol: AnyObject {
     func coordinates(cityName: String, lat: Double, lon: Double)
@@ -16,11 +17,11 @@ class WeatherMapViewController: UIViewController {
     
     var coordinator: CoordinatorProtocol?
     weak var delegate: MapCoordinatesProtocol?
-//    lazy var presenter = WeatherPresenter(view: self, networkManager: NetworkManager())
     
     private let mapView = MKMapView()
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
+    private let locationButton = TopLocationButton(image: SFSymbols.location)
     private let completer = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
     private var isTableViewHidden = false
@@ -39,17 +40,31 @@ class WeatherMapViewController: UIViewController {
         /// Layouts
         mapView.setWeatherMapElements(view: view, subView: mapView)
         tableView.setWeatherMapElements(view: view, subView: tableView)
+        locationButton.setMapButton(view: mapView, button: locationButton)
         /// Delegates
         tableView.delegate = self
         tableView.dataSource = self
         completer.delegate = self
+        mapView.showsUserLocation = true
+        /// Add acctions:
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
+        navigationItem.rightBarButtonItem = searchButton
+        locationButton.addTarget(self, action: #selector(locationButtonPressed), for: .touchUpInside)
     }
     
+    // MARK: - Actions:
     @objc private func searchButtonPressed() {
         tableView.isHidden = false
         tableView.reloadData()
     }
     
+    @objc private func locationButtonPressed() {
+        if let location = mapView.userLocation.location {
+            mapView.setCenter(location.coordinate, animated: true)
+        }
+    }
+    
+    // MARK: - Configuration UI
     /// Configure the search controller
     private func setSearchController() {
         searchController.searchResultsUpdater = self
@@ -69,9 +84,7 @@ class WeatherMapViewController: UIViewController {
         /// color bar buttons
         navigationController?.navigationBar.tintColor = .white
         
-        /// Add search bar button:
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
-        navigationItem.rightBarButtonItem = searchButton
+        
     }
     
     private func addPinToMap(coordinate: CLLocationCoordinate2D) {
@@ -116,7 +129,7 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
 
         search.start { response, error in
             if let placemark = response?.mapItems.first?.placemark {
-                let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
                 self.addPinToMap(coordinate: region.center)
                 self.mapView.setRegion(region, animated: true)
             }

@@ -39,7 +39,6 @@
 		BCCF6E8629A637A2009A6CC1 /* ImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */; };
 		BCCF6E8829A66E18009A6CC1 /* WeatherMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8729A66E18009A6CC1 /* WeatherMapViewController.swift */; };
 		BCCF6E8A29A68803009A6CC1 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8929A68803009A6CC1 /* ResultViewController.swift */; };
-		BCCF6E8C29A8C1FD009A6CC1 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8B29A8C1FD009A6CC1 /* MapPresenter.swift */; };
 		DA2BE0DEDBE5E5506B392030 /* Pods_NatifeWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5882D76B1F5D2441127BB1B /* Pods_NatifeWeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +79,6 @@
 		BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresenter.swift; sourceTree = "<group>"; };
 		BCCF6E8729A66E18009A6CC1 /* WeatherMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMapViewController.swift; sourceTree = "<group>"; };
 		BCCF6E8929A68803009A6CC1 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
-		BCCF6E8B29A8C1FD009A6CC1 /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		CB10C958D77849A9ACC74AD9 /* Pods-NatifeWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatifeWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-NatifeWeatherApp/Pods-NatifeWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,7 +204,6 @@
 			children = (
 				BCB3063E2997C2E70088ADBC /* WeatherPresenter.swift */,
 				BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */,
-				BCCF6E8B29A8C1FD009A6CC1 /* MapPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -457,7 +454,6 @@
 				BCB306432997C3A50088ADBC /* Constants.swift in Sources */,
 				BCB306412997C34F0088ADBC /* WeatherModel.swift in Sources */,
 				BCB3063D2997C22F0088ADBC /* WeatherCoordinator.swift in Sources */,
-				BCCF6E8C29A8C1FD009A6CC1 /* MapPresenter.swift in Sources */,
 				BCB30661299950E10088ADBC /* DailyWeatherViewController.swift in Sources */,
 				BCCF6E8829A66E18009A6CC1 /* WeatherMapViewController.swift in Sources */,
 				BCB306552999368F0088ADBC /* UIColor+Ext.swift in Sources */,

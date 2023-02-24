@@ -20,7 +20,7 @@ class TopNameViewController: RotatableViewController {
     
     /// Private UI properties
     private let mapImageView = UIImageView()
-    private let locationButton = TopLocationButton()
+    private let locationButton = TopLocationButton(image: SFSymbols.pin)
     private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
     private let currentDateLabel = WeatherLabel(textAlignment: .left, fontSize: 18, weight: .medium)
     
