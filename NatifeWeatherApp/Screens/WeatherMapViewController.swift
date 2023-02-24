@@ -23,6 +23,7 @@ class WeatherMapViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private let completer = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
+    private var isTableViewHidden = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,13 +107,13 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let completion = searchResults[indexPath.row]
-        completer.queryFragment = completion.title
         searchController.searchBar.text = completion.title
         tableView.isHidden = true
         searchController.dismiss(animated: true, completion: nil)
-        
+        isTableViewHidden = true
         let request = MKLocalSearch.Request(completion: completion)
         let search = MKLocalSearch(request: request)
+
         search.start { response, error in
             if let placemark = response?.mapItems.first?.placemark {
                 let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -127,26 +128,25 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WeatherMapViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        tableView.isHidden = false
-        tableView.reloadData()
-        let query = searchController.searchBar.text ?? "" /// when you tap on searchBar
-        completer.queryFragment = query
+            tableView.isHidden = false
+            tableView.reloadData()
+            let query = searchController.searchBar.text ?? ""
+            completer.queryFragment = query
     }
-    
 }
 
 // MARK: - MKLocalSearchCompleterDelegate
 
 extension WeatherMapViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchResults = completer.results /// when you start typing
-        tableView.reloadData()
-        tableView.isHidden = searchResults.isEmpty
-    }
-}
-
-extension WeatherMapViewController: WeatherViewProtocol {
-    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
+        if !isTableViewHidden {
+            searchResults = completer.results
+            tableView.reloadData()
+            tableView.isHidden = searchResults.isEmpty
+        } else {
+            tableView.isHidden = true
+            isTableViewHidden = false
+        }
     }
 }
 
