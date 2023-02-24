@@ -24,10 +24,7 @@ class WeatherMainViewController: UIViewController {
     private let hourlyWeatherContainer = UIView()
     private let forecastWeatherContainer = UIView()
     private let locationManager = CLLocationManager()
-    
-    var cityName = ""
-    var lat: Double = 0
-    var lon: Double = 0
+
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -94,6 +91,11 @@ extension WeatherMainViewController: WeatherViewProtocol {
 }
 
 extension WeatherMainViewController: TopCoordinatesProtocol {
+    func requestLocation() {
+        removeChild()
+        locationManager.requestLocation()
+    }
+    
     func coordinates(cityName: String, lat: Double, lon: Double) {
         removeChild()
         presenter?.getWeatherByLocation(lat: lat, lon: lon)
@@ -106,8 +108,8 @@ extension WeatherMainViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last, location.horizontalAccuracy > 0 else { return }
         locationManager.stopUpdatingLocation()
-        self.lon = Double(location.coordinate.longitude)
-        self.lat = Double(location.coordinate.latitude)
+        let lon = Double(location.coordinate.longitude)
+        let lat = Double(location.coordinate.latitude)
         /// Initial location
         presenter?.getWeatherByLocation(lat: lat, lon: lon)
     }

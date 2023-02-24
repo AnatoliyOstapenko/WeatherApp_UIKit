@@ -9,6 +9,7 @@ import UIKit
 
 protocol TopCoordinatesProtocol: AnyObject {
     func coordinates(cityName: String, lat: Double, lon: Double)
+    func requestLocation()
 }
 
 class TopNameViewController: RotatableViewController {
@@ -44,7 +45,6 @@ class TopNameViewController: RotatableViewController {
     private func setButtonMenu() {
         let menu = UIMenu(title: "", children: [
             UIAction(title: ActionTitle.currentLocation, image: SFSymbols.location, handler: menuHandler),
-            UIAction(title: ActionTitle.findLocation, image: SFSymbols.locationGlass, handler: menuHandler),
             UIAction(title: ActionTitle.findCity, image: SFSymbols.glass, handler: menuHandler),
         ])
         locationButton.menu = menu
@@ -52,8 +52,7 @@ class TopNameViewController: RotatableViewController {
     
     private func menuHandler(action: UIAction) {
         switch action.title {
-        case ActionTitle.currentLocation: print("01")//self.locationManager.requestLocation()
-        case ActionTitle.findLocation: print("02")
+        case ActionTitle.currentLocation: self.delegate?.requestLocation()
         case ActionTitle.findCity: coordinator?.createMapView(viewController: self)
         default: break
         }

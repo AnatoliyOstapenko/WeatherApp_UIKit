@@ -18,9 +18,9 @@ enum Constants {
 }
 
 enum ActionTitle {
-    static let currentLocation  = NSLocalizedString("Поточне розташування", comment: "")
+    static let currentLocation  = NSLocalizedString("Current location", comment: "")
     static let findLocation = NSLocalizedString("Вибір точки на карті", comment: "")
-    static let findCity = NSLocalizedString("Пошук міста", comment: "")
+    static let findCity = NSLocalizedString("Search for places", comment: "")
 }
 
 enum SFSymbols {
