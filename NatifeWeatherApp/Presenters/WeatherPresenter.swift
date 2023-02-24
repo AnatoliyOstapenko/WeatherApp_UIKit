@@ -42,8 +42,12 @@ class WeatherPresenter: WeatherPresenterProtocol {
             self.handleWeatherResult(weather)
         }
     }
-    
+
     private func handleWeatherResult(_ result: Result<WeatherModel, NetworkErrors>) {
+        /// clear arrays before new fetching weather data
+        self.weather.removeAll()
+        self.filteredWeather.removeAll()
+        
         DispatchQueue.main.async {
             switch result {
             case .success(let weather):
@@ -64,12 +68,11 @@ class WeatherPresenter: WeatherPresenterProtocol {
                     }
                 }
                 /// prefix to filter the first 9 elements from the array. delete if you want
-                print("City name: \(weather.city.name)")
                 self.view?.setWeather(weather: Array(self.weather.prefix(9)),
                                       filteredWeather: self.filteredWeather, city: weather.city.name)
                 
             case .failure(let error):
-                print(String(describing: error.hashValue))
+                print("Error with fetchimg data in Presenter \(error)")
             }
         }
     }

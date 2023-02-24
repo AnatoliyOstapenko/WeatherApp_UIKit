@@ -7,20 +7,27 @@
 
 import UIKit
 
+protocol TopCoordinatesProtocol: AnyObject {
+    func coordinates(cityName: String, lat: Double, lon: Double)
+}
+
 class TopNameViewController: RotatableViewController {
 
     var coordinator: CoordinatorProtocol?
+    weak var delegate: TopCoordinatesProtocol?
     private var weather: [WeatherData]?
-
+    
+    /// Private UI properties
     private let mapImageView = UIImageView()
     private let locationButton = TopLocationButton()
     private let cityNameLabel = WeatherLabel(textAlignment: .left, fontSize: 28, weight: .bold)
     private let currentDateLabel = WeatherLabel(textAlignment: .left, fontSize: 18, weight: .medium)
     
-    init(weather: [WeatherData], cityName: String) {
+    init(weather: [WeatherData], cityName: String, delegate: TopCoordinatesProtocol) {
         super.init(nibName: nil, bundle: nil)
         self.weather = weather
         self.cityNameLabel.text = cityName.capitalizingFirstLetter()
+        self.delegate = delegate
     }
     
     required init?(coder: NSCoder) {
@@ -47,7 +54,7 @@ class TopNameViewController: RotatableViewController {
         switch action.title {
         case ActionTitle.currentLocation: print("01")//self.locationManager.requestLocation()
         case ActionTitle.findLocation: print("02")
-        case ActionTitle.findCity: coordinator?.createMapView()
+        case ActionTitle.findCity: coordinator?.createMapView(viewController: self)
         default: break
         }
     }
@@ -68,6 +75,12 @@ class TopNameViewController: RotatableViewController {
     
     private func updateUI() {
         self.currentDateLabel.text = self.weather?.first?.date.topDay ?? "no date"
+    }
+}
+
+extension TopNameViewController: MapCoordinatesProtocol {
+    func coordinates(cityName: String, lat: Double, lon: Double) {
+        self.delegate?.coordinates(cityName: cityName, lat: lat, lon: lon)
     }
 }
 

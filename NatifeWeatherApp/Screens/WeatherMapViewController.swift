@@ -8,10 +8,15 @@
 import UIKit
 import MapKit
 
+protocol MapCoordinatesProtocol: AnyObject {
+    func coordinates(cityName: String, lat: Double, lon: Double)
+}
+
 class WeatherMapViewController: UIViewController {
     
     var coordinator: CoordinatorProtocol?
-    lazy var presenter = WeatherPresenter(view: self, networkManager: NetworkManager())
+    weak var delegate: MapCoordinatesProtocol?
+//    lazy var presenter = WeatherPresenter(view: self, networkManager: NetworkManager())
     
     private let mapView = MKMapView()
     private let tableView = UITableView()
@@ -72,8 +77,10 @@ class WeatherMapViewController: UIViewController {
         let annotation = MKPointAnnotation()
         annotation.title = completer.queryFragment
         annotation.coordinate = coordinate
-        presenter.getWeatherByLocation(lat: coordinate.latitude, lon: coordinate.longitude)
         mapView.addAnnotation(annotation)
+        delegate?.coordinates(cityName: annotation.title ?? "",
+                              lat: coordinate.latitude,
+                              lon: coordinate.longitude)
     }
 }
 
@@ -107,7 +114,6 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
         let request = MKLocalSearch.Request(completion: completion)
         let search = MKLocalSearch(request: request)
         search.start { response, error in
-            print(response.hashValue)
             if let placemark = response?.mapItems.first?.placemark {
                 let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
                 self.addPinToMap(coordinate: region.center)

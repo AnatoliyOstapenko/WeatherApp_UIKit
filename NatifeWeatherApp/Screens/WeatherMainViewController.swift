@@ -26,6 +26,8 @@ class WeatherMainViewController: UIViewController {
     private let locationManager = CLLocationManager()
     
     var cityName = ""
+    var lat: Double = 0
+    var lon: Double = 0
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,10 +49,18 @@ class WeatherMainViewController: UIViewController {
     }
     
     private func setChildView(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
-        addChildVC(childVC: TopNameViewController(weather: weather, cityName: city), containerView: topNameContainer)
+        addChildVC(childVC: TopNameViewController(weather: weather, cityName: city, delegate: self), containerView: topNameContainer)
         addChildVC(childVC: DailyWeatherViewController(weather: weather), containerView: dailyWeatherContainer)
         addChildVC(childVC: HourlyWeatherViewController(weather: weather), containerView: hourlyWeatherContainer)
         addChildVC(childVC: ForecastWeatherViewController(weather: filteredWeather), containerView: forecastWeatherContainer)
+    }
+    
+    private func removeChild() {
+        self.children.forEach {
+            $0.willMove(toParent: nil)
+            $0.view.removeFromSuperview()
+            $0.removeFromParent()
+        }
     }
     
     private func setInitialLocation() {
@@ -79,17 +89,25 @@ class WeatherMainViewController: UIViewController {
 // MARK: - Update weather
 extension WeatherMainViewController: WeatherViewProtocol {
     func setWeather(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
-        print("WEATHER city: \(city), weather: \(weather.first?.temp)")
-        setChildView(weather: weather, filteredWeather: filteredWeather, city: city)
+        setChildView(weather: weather, filteredWeather: filteredWeather, city: city)        
     }
+}
+
+extension WeatherMainViewController: TopCoordinatesProtocol {
+    func coordinates(cityName: String, lat: Double, lon: Double) {
+        removeChild()
+        presenter?.getWeatherByLocation(lat: lat, lon: lon)
+    }
+    
+    
 }
 // MARK: - CLLocationManagerDelegate
 extension WeatherMainViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last, location.horizontalAccuracy > 0 else { return }
         locationManager.stopUpdatingLocation()
-        let lon = Double(location.coordinate.longitude)
-        let lat = Double(location.coordinate.latitude)
+        self.lon = Double(location.coordinate.longitude)
+        self.lat = Double(location.coordinate.latitude)
         /// Initial location
         presenter?.getWeatherByLocation(lat: lat, lon: lon)
     }

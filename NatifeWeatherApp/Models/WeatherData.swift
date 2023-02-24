@@ -8,8 +8,8 @@
 import Foundation
 
 // Supplementary struct
-struct WeatherData: Decodable, Identifiable {
-    var id = UUID()
+struct WeatherData: Decodable {
+//    var id = UUID()
     let date: Int
     let temp: String
     let icon: String

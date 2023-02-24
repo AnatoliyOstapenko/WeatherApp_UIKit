@@ -10,7 +10,7 @@ import UIKit
 protocol CoordinatorProtocol {
     var navController: UINavigationController { get set }
     func start()
-    func createMapView()
+    func createMapView(viewController: UIViewController)
 }
 
 class WeatherCoordinator: CoordinatorProtocol {
@@ -27,9 +27,14 @@ class WeatherCoordinator: CoordinatorProtocol {
         navController.pushViewController(view, animated: true)
     }
     
-    func createMapView() {
+    func createMapView(viewController: UIViewController) {
         let view = WeatherMapViewController()
         view.coordinator = self
+        if let viewController = viewController as? TopNameViewController {
+            view.delegate = viewController
+        }
+        
+        
         navController.navigationBar.topItem?.backButtonTitle = "" /// delete "back" title
         navController.pushViewController(view, animated: true)
     }
