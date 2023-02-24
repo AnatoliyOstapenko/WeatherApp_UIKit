@@ -130,7 +130,7 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
             if let error = error {
                 print("Reverse geocoding error: \(error.localizedDescription)")
             } else if let placemark = placemarks?.first {
-                self.annotation?.title = placemark.compactAddress
+                self.annotation?.title = placemark.locality /// locality more provide more generic city name
             }
         }
     }
@@ -176,7 +176,7 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
 
         search.start { response, error in
             if let placemark = response?.mapItems.first?.placemark {
-                let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
+                let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: 50000, longitudinalMeters: 50000)
                 self.addPinToMap(coordinate: region.center)
                 self.mapView.setRegion(region, animated: true)
             }
@@ -220,22 +220,3 @@ extension WeatherMapViewController: MKMapViewDelegate {
         }
     }
 }
-
-extension CLPlacemark {
-    var compactAddress: String? {
-        if let name = name, let locality = locality {
-            var address = name
-            if name != locality {
-                address += ", " + locality
-            }
-            if let country = country {
-                address += ", " + country
-            }
-            return address
-        } else {
-            return nil
-        }
-    }
-}
-
-
