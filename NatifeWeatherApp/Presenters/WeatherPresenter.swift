@@ -14,7 +14,6 @@ protocol WeatherViewProtocol: AnyObject {
 protocol WeatherPresenterProtocol: AnyObject {
     init (view: WeatherViewProtocol, networkManager: NetworkManagerProtocol)
     func getWeatherByLocation(lat: Double, lon: Double)
-    func getWeatherByCityName(cityName: String)
 }
 
 class WeatherPresenter: WeatherPresenterProtocol {
@@ -35,14 +34,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
             self.handleWeatherResult(weather)
         }
     }
-
-    func getWeatherByCityName(cityName: String) {
-        networkManager.weatherByCityName(cityName: cityName) { [weak self] weather in
-            guard let self = self else { return }
-            self.handleWeatherResult(weather)
-        }
-    }
-
+    
     private func handleWeatherResult(_ result: Result<WeatherModel, NetworkErrors>) {
         /// clear arrays before new fetching weather data
         self.weather.removeAll()

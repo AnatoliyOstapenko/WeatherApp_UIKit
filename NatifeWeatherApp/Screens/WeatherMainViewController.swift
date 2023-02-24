@@ -96,7 +96,7 @@ extension WeatherMainViewController: TopCoordinatesProtocol {
         locationManager.requestLocation()
     }
     
-    func coordinates(cityName: String, lat: Double, lon: Double) {
+    func coordinates(lat: Double, lon: Double) {
         removeChild()
         presenter?.getWeatherByLocation(lat: lat, lon: lon)
     }

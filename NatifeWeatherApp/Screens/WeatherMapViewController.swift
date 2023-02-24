@@ -10,10 +10,10 @@ import MapKit
 import CoreLocation
 
 protocol MapCoordinatesProtocol: AnyObject {
-    func coordinates(cityName: String, lat: Double, lon: Double)
+    func coordinates(lat: Double, lon: Double)
 }
 
-class WeatherMapViewController: UIViewController {
+class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var coordinator: CoordinatorProtocol?
     weak var delegate: MapCoordinatesProtocol?
@@ -24,7 +24,13 @@ class WeatherMapViewController: UIViewController {
     private let locationButton = TopLocationButton(image: SFSymbols.location)
     private let completer = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
+    private var tappedLocation: MKPointAnnotation?
     private var isTableViewHidden = false
+    
+    lazy var tapGesture: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        return tap
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +51,14 @@ class WeatherMapViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         completer.delegate = self
+        mapView.delegate = self
         mapView.showsUserLocation = true
+        tapGesture.delegate = self
         /// Add acctions:
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
         navigationItem.rightBarButtonItem = searchButton
         locationButton.addTarget(self, action: #selector(locationButtonPressed), for: .touchUpInside)
+        mapView.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Actions:
@@ -61,6 +70,29 @@ class WeatherMapViewController: UIViewController {
     @objc private func locationButtonPressed() {
         if let location = mapView.userLocation.location {
             mapView.setCenter(location.coordinate, animated: true)
+        }
+    }
+                                         
+    @objc private func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        if gestureRecognizer.state == .ended {
+            /// Remove any existing tapped location annotation
+            if let tappedLocation = tappedLocation {
+                mapView.removeAnnotation(tappedLocation)
+            }
+            /// Set a new coordinates to get weather data
+            let point = gestureRecognizer.location(in: mapView)
+            let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+            addPinToMap(coordinate: coordinate)
+            
+//            delegate?.coordinates(cityName: completer.queryFragment,
+//                                  lat: coordinate.latitude,
+//                                  lon: coordinate.longitude)
+//
+//            /// Add a new annotation at the tapped location
+//            let annotation = MKPointAnnotation()
+//            annotation.coordinate = coordinate
+//            mapView.addAnnotation(annotation)
+//            tappedLocation = annotation
         }
     }
     
@@ -92,9 +124,7 @@ class WeatherMapViewController: UIViewController {
         annotation.title = completer.queryFragment
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
-        delegate?.coordinates(cityName: annotation.title ?? "",
-                              lat: coordinate.latitude,
-                              lon: coordinate.longitude)
+        delegate?.coordinates(lat: coordinate.latitude, lon: coordinate.longitude)
     }
 }
 
@@ -162,6 +192,18 @@ extension WeatherMapViewController: MKLocalSearchCompleterDelegate {
         }
     }
 }
+
+// MARK: - MKMapViewDelegate
+
+extension WeatherMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotaion = view.annotation {
+            delegate?.coordinates(lat: annotaion.coordinate.latitude,
+                                  lon: annotaion.coordinate.longitude)
+        }
+    }
+}
+
 
 
 

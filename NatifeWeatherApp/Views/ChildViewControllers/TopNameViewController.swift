@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TopCoordinatesProtocol: AnyObject {
-    func coordinates(cityName: String, lat: Double, lon: Double)
+    func coordinates(lat: Double, lon: Double)
     func requestLocation()
 }
 
@@ -78,8 +78,8 @@ class TopNameViewController: RotatableViewController {
 }
 
 extension TopNameViewController: MapCoordinatesProtocol {
-    func coordinates(cityName: String, lat: Double, lon: Double) {
-        self.delegate?.coordinates(cityName: cityName, lat: lat, lon: lon)
+    func coordinates(lat: Double, lon: Double) {
+        self.delegate?.coordinates(lat: lat, lon: lon)
     }
 }
 
