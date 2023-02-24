@@ -35,3 +35,6 @@
 - [openweathermap](https://openweathermap.org/api)
 
 ## Pictures:
+![weathe demo app](picFirst.png)
+![weathe demo app](picSecond.png)
+![weathe demo app](picThird.png)
