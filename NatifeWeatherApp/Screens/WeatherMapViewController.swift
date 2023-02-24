@@ -24,7 +24,7 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
     private let locationButton = TopLocationButton(image: SFSymbols.location)
     private let completer = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
-    private var tappedLocation: MKPointAnnotation?
+    private var annotation: MKPointAnnotation?
     private var isTableViewHidden = false
     
     lazy var tapGesture: UITapGestureRecognizer = {
@@ -76,23 +76,24 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc private func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         if gestureRecognizer.state == .ended {
             /// Remove any existing tapped location annotation
-            if let tappedLocation = tappedLocation {
+            if let tappedLocation = annotation {
                 mapView.removeAnnotation(tappedLocation)
             }
             /// Set a new coordinates to get weather data
             let point = gestureRecognizer.location(in: mapView)
             let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
-            addPinToMap(coordinate: coordinate)
+//            addPinToMap(coordinate: coordinate)
             
-//            delegate?.coordinates(cityName: completer.queryFragment,
-//                                  lat: coordinate.latitude,
-//                                  lon: coordinate.longitude)
-//
-//            /// Add a new annotation at the tapped location
-//            let annotation = MKPointAnnotation()
-//            annotation.coordinate = coordinate
-//            mapView.addAnnotation(annotation)
-//            tappedLocation = annotation
+            delegate?.coordinates(
+                                  lat: coordinate.latitude,
+                                  lon: coordinate.longitude)
+
+            /// Add a new annotation at the tapped location
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            getTitleAnnotation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            mapView.addAnnotation(annotation)
+            self.annotation = annotation
         }
     }
     
@@ -115,9 +116,25 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
         navigationItem.hidesSearchBarWhenScrolling = false
         /// color bar buttons
         navigationController?.navigationBar.tintColor = .white
-        
-        
     }
+    
+    // Private methodes
+    private func getTitleAnnotation(latitude: CLLocationDegrees,
+                                    longitude: CLLocationDegrees) {
+        /// Reverse geocode the tapped location to get the title annotation
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: latitude,
+                                  longitude: longitude)
+        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Reverse geocoding error: \(error.localizedDescription)")
+            } else if let placemark = placemarks?.first {
+                self.annotation?.title = placemark.compactAddress
+            }
+        }
+    }
+    
     
     private func addPinToMap(coordinate: CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation()
@@ -204,6 +221,21 @@ extension WeatherMapViewController: MKMapViewDelegate {
     }
 }
 
-
+extension CLPlacemark {
+    var compactAddress: String? {
+        if let name = name, let locality = locality {
+            var address = name
+            if name != locality {
+                address += ", " + locality
+            }
+            if let country = country {
+                address += ", " + country
+            }
+            return address
+        } else {
+            return nil
+        }
+    }
+}
 
 
