@@ -82,12 +82,8 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
             /// Set a new coordinates to get weather data
             let point = gestureRecognizer.location(in: mapView)
             let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
-//            addPinToMap(coordinate: coordinate)
+            delegate?.coordinates(lat: coordinate.latitude,lon: coordinate.longitude)
             
-            delegate?.coordinates(
-                                  lat: coordinate.latitude,
-                                  lon: coordinate.longitude)
-
             /// Add a new annotation at the tapped location
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
@@ -137,11 +133,15 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     private func addPinToMap(coordinate: CLLocationCoordinate2D) {
+        if let newAnnotation = annotation {
+            mapView.removeAnnotation(newAnnotation)
+        }
         let annotation = MKPointAnnotation()
         annotation.title = completer.queryFragment
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
         delegate?.coordinates(lat: coordinate.latitude, lon: coordinate.longitude)
+        self.annotation = annotation
     }
 }
 
