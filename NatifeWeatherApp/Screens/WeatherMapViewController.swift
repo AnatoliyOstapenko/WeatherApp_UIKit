@@ -17,6 +17,7 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var coordinator: CoordinatorProtocol?
     weak var delegate: MapCoordinatesProtocol?
+    lazy var presenter = WeatherPresenter(view: self, networkManager: NetworkManager())
     
     private let mapView = MKMapView()
     private let tableView = UITableView()
@@ -25,7 +26,11 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
     private let completer = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
     private var annotation: MKPointAnnotation?
+    private var coordinate: CLLocationCoordinate2D?
     private var isTableViewHidden = false
+    
+    private var cityName: String?
+    private var temperature: String?
     
     lazy var tapGesture: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -75,21 +80,18 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
                                          
     @objc private func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         if gestureRecognizer.state == .ended {
-            /// Remove any existing tapped location annotation
+            /// Hide keyboard:
+            searchController.searchBar.resignFirstResponder()
+            /// Remove any existing tapped location annotation:
             if let tappedLocation = annotation {
                 mapView.removeAnnotation(tappedLocation)
             }
             /// Set a new coordinates to get weather data
             let point = gestureRecognizer.location(in: mapView)
             let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
-            delegate?.coordinates(lat: coordinate.latitude,lon: coordinate.longitude)
-            
-            /// Add a new annotation at the tapped location
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            getTitleAnnotation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-            mapView.addAnnotation(annotation)
-            self.annotation = annotation
+            self.coordinate = coordinate
+            /// Get weather data from network manager:
+            presenter.getWeatherByLocation(lat: coordinate.latitude, lon: coordinate.longitude)
         }
     }
     
@@ -115,37 +117,30 @@ class WeatherMapViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // Private methodes
-    private func getTitleAnnotation(latitude: CLLocationDegrees,
-                                    longitude: CLLocationDegrees) {
-        /// Reverse geocode the tapped location to get the title annotation
-        let geocoder = CLGeocoder()
-        let location = CLLocation(latitude: latitude,
-                                  longitude: longitude)
-        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
-            guard let self = self else { return }
-            if let error = error {
-                print("Reverse geocoding error: \(error.localizedDescription)")
-            } else if let placemark = placemarks?.first {
-                self.annotation?.title = placemark.locality /// locality more provide more generic city name
-            }
+    /// Update annotation and mapView
+    private func updateAnnotation(city: String) {
+        if let coordinate = self.coordinate {
+            let annotation = MKPointAnnotation()
+            annotation.title = city
+            annotation.coordinate = coordinate
+            mapView.addAnnotation(annotation)
+            self.annotation = annotation
         }
     }
-    
-    
+        
     private func addPinToMap(coordinate: CLLocationCoordinate2D) {
         if let newAnnotation = annotation {
             mapView.removeAnnotation(newAnnotation)
         }
-        let annotation = MKPointAnnotation()
-        annotation.title = completer.queryFragment
-        annotation.coordinate = coordinate
-        mapView.addAnnotation(annotation)
-        delegate?.coordinates(lat: coordinate.latitude, lon: coordinate.longitude)
-        self.annotation = annotation
+        self.coordinate = coordinate
+        /// Get weather data from network manager:
+        presenter.getWeatherByLocation(lat: coordinate.latitude, lon: coordinate.longitude)
+        /// Set weather on the main screen:
+        delegate?.coordinates(lat: coordinate.latitude,lon: coordinate.longitude)
     }
 }
 
-// MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource
 
 extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -168,11 +163,11 @@ extension WeatherMapViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let completion = searchResults[indexPath.row]
         searchController.searchBar.text = completion.title
-        tableView.isHidden = true
         searchController.dismiss(animated: true, completion: nil)
-        isTableViewHidden = true
         let request = MKLocalSearch.Request(completion: completion)
         let search = MKLocalSearch(request: request)
+        isTableViewHidden = true
+        tableView.isHidden = true
 
         search.start { response, error in
             if let placemark = response?.mapItems.first?.placemark {
@@ -218,5 +213,25 @@ extension WeatherMapViewController: MKMapViewDelegate {
             delegate?.coordinates(lat: annotaion.coordinate.latitude,
                                   lon: annotaion.coordinate.longitude)
         }
+    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        /// Customize glyph design and text. Set temperature to glyph
+        pinView.canShowCallout = true
+        pinView.glyphTintColor = .white
+        pinView.glyphImage = nil
+        pinView.alpha = 0.8
+        pinView.glyphText = temperature
+        pinView.markerTintColor = WeatherColor.darkBlue
+        return pinView
+    }
+}
+
+// MARK: - WeatherViewProtocol
+
+extension WeatherMapViewController: WeatherViewProtocol {
+    func setWeather(weather: [WeatherData], filteredWeather: [WeatherData], city: String) {
+        self.temperature = weather.first?.temp
+        self.updateAnnotation(city: city)
     }
 }
