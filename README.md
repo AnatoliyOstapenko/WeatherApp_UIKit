@@ -1,12 +1,15 @@
 # Weather App
 
 <p align="left">	
-    <a href="https://swift.org">
-        <img src="https://img.shields.io/badge/swift-5.2-brightgreen.svg" alt="Swift 5.2">
-    </a>
-        <img src="https://img.shields.io/badge/coverage-95%25-green" >
+<img src="https://img.shields.io/badge/version-1.0.1-blue">
 </a>
-        <img src="https://img.shields.io/badge/version-1.0.0-blue" >
+<a href="https://www.linkedin.com/in/anatoliyostapenko">
+<img src="https://img.shields.io/badge/linkedin-%230077B5.svg">
+</a>
+<a href="https://www.swift.org">
+<img src="https://img.shields.io/badge/swift-F54A2A">
+<a href="https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-16_2-release-notes">
+<img src="https://img.shields.io/badge/iOS 16.2-000000?">
 </p>
 
 ## Main screen:
@@ -37,4 +40,4 @@
 ## Pictures:
 ![weathe demo app](picFirst.png)
 ![weathe demo app](picSecond.png)
-![weathe demo app](picThird.png)
+![weathe demo app](picLondon.png)
