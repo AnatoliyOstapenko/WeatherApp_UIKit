@@ -38,21 +38,21 @@ extension Int {
     func directionToSymbol(_ direction: Double) -> String {
         switch direction {
         case 0...22.5, 337.5...360:
-            return "N"
+            return "\u{2191}"
         case 22.5...67.5:
-            return "NE"
+            return "\u{2197}"
         case 67.5...112.5:
-            return "E"
+            return "\u{2192}"
         case 112.5...157.5:
-            return "SE"
+            return "\u{2198}"
         case 157.5...202.5:
-            return "S"
+            return "\u{2193}"
         case 202.5...247.5:
-            return "SW"
+            return "\u{2199}"
         case 247.5...292.5:
-            return "W"
+            return "\u{2190}"
         case 292.5...337.5:
-            return "NW"
+            return "\u{2196}"
         default:
             return ""
         }
