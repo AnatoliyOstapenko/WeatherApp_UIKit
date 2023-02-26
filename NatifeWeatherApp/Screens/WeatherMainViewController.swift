@@ -63,7 +63,7 @@ class WeatherMainViewController: UIViewController {
     private func setInitialLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
     }
     
     private func configureUI() {
@@ -93,7 +93,7 @@ extension WeatherMainViewController: WeatherViewProtocol {
 extension WeatherMainViewController: TopCoordinatesProtocol {
     func requestLocation() {
         removeChild()
-        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
     }
     
     func coordinates(lat: Double, lon: Double) {
@@ -112,6 +112,7 @@ extension WeatherMainViewController: CLLocationManagerDelegate {
         let lat = Double(location.coordinate.latitude)
         /// Initial location
         presenter?.getWeatherByLocation(lat: lat, lon: lon)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
