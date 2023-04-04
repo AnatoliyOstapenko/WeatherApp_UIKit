@@ -52,7 +52,7 @@
 		BC31272A29A11B8500DD5FD0 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		BC31273029A2423000DD5FD0 /* RotatableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatableViewController.swift; sourceTree = "<group>"; };
 		BC31273329A2596500DD5FD0 /* TopLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLocationButton.swift; sourceTree = "<group>"; };
-		BCB306232997BE550088ADBC /* NatifeWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatifeWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCB306232997BE550088ADBC /* WeatherApp_UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp_UIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCB306262997BE550088ADBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCB306282997BE550088ADBC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BCB3062A2997BE550088ADBC /* WeatherMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMainViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		BCB306242997BE550088ADBC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BCB306232997BE550088ADBC /* NatifeWeatherApp.app */,
+				BCB306232997BE550088ADBC /* WeatherApp_UIKit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,9 +321,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BCB306222997BE550088ADBC /* NatifeWeatherApp */ = {
+		BCB306222997BE550088ADBC /* WeatherApp_UIKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BCB306372997BE580088ADBC /* Build configuration list for PBXNativeTarget "NatifeWeatherApp" */;
+			buildConfigurationList = BCB306372997BE580088ADBC /* Build configuration list for PBXNativeTarget "WeatherApp_UIKit" */;
 			buildPhases = (
 				17DD94980FE00F1A156E099B /* [CP] Check Pods Manifest.lock */,
 				BCB3061F2997BE550088ADBC /* Sources */,
@@ -335,9 +335,9 @@
 			);
 			dependencies = (
 			);
-			name = NatifeWeatherApp;
+			name = WeatherApp_UIKit;
 			productName = NatifeWeatherApp;
-			productReference = BCB306232997BE550088ADBC /* NatifeWeatherApp.app */;
+			productReference = BCB306232997BE550088ADBC /* WeatherApp_UIKit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -355,7 +355,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BCB3061E2997BE550088ADBC /* Build configuration list for PBXProject "NatifeWeatherApp" */;
+			buildConfigurationList = BCB3061E2997BE550088ADBC /* Build configuration list for PBXProject "WeatherApp_UIKit" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -368,7 +368,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BCB306222997BE550088ADBC /* NatifeWeatherApp */,
+				BCB306222997BE550088ADBC /* WeatherApp_UIKit */,
 			);
 		};
 /* End PBXProject section */
@@ -655,7 +655,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BCB3061E2997BE550088ADBC /* Build configuration list for PBXProject "NatifeWeatherApp" */ = {
+		BCB3061E2997BE550088ADBC /* Build configuration list for PBXProject "WeatherApp_UIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BCB306352997BE580088ADBC /* Debug */,
@@ -664,7 +664,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BCB306372997BE580088ADBC /* Build configuration list for PBXNativeTarget "NatifeWeatherApp" */ = {
+		BCB306372997BE580088ADBC /* Build configuration list for PBXNativeTarget "WeatherApp_UIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BCB306382997BE580088ADBC /* Debug */,
