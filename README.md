@@ -12,6 +12,10 @@
 <img src="https://img.shields.io/badge/iOS 16.2-000000?">
 </p>
 
+<p align="left">	
+<img src="weather.png" width="120" height="120">
+</p>
+
 ## Main screen:
 - Today's forecast
 - Forecast for the next few days
@@ -38,6 +42,10 @@
 - [openweathermap](https://openweathermap.org/api)
 
 ## Pictures:
-![weathe demo app](picFirst.png)
-![weathe demo app](picSecond.png)
-![weathe demo app](picLondon.png)
+<p align="left">	
+<img src="picFirst.png" width="260" height="480">
+</a>
+<img src="picSecond.png" width="260" height="480">
+</a>
+<img src="picLondon.png" width="260" height="480">
+</p>
