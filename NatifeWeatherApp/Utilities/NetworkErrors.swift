@@ -8,7 +8,6 @@
 import Foundation
 
 enum NetworkErrors: String, Error {
-    
     case invalidURL = "It seems that URL adress appears to be invalid"
     case invalidResponse = "It seems that response appears to be invalid, check response status code"
     case invalidData = "It seems that data appears to be invalid"

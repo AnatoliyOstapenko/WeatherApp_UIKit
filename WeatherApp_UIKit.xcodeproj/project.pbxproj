@@ -39,6 +39,7 @@
 		BCCF6E8629A637A2009A6CC1 /* ImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */; };
 		BCCF6E8829A66E18009A6CC1 /* WeatherMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6E8729A66E18009A6CC1 /* WeatherMapViewController.swift */; };
 		DA2BE0DEDBE5E5506B392030 /* Pods_NatifeWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5882D76B1F5D2441127BB1B /* Pods_NatifeWeatherApp.framework */; };
+		F942385829E87E1B00BCDDAF /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = F942385729E87E1B00BCDDAF /* Password.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		BCCF6E8529A637A2009A6CC1 /* ImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresenter.swift; sourceTree = "<group>"; };
 		BCCF6E8729A66E18009A6CC1 /* WeatherMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMapViewController.swift; sourceTree = "<group>"; };
 		CB10C958D77849A9ACC74AD9 /* Pods-NatifeWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatifeWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-NatifeWeatherApp/Pods-NatifeWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
+		F942385729E87E1B00BCDDAF /* Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Password.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 			children = (
 				BCB306462997CB010088ADBC /* NetworkErrors.swift */,
 				BCB306422997C3A50088ADBC /* Constants.swift */,
+				F942385729E87E1B00BCDDAF /* Password.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				BCC68D2C29A524A200A2839E /* WeatherData.swift in Sources */,
 				BCB306432997C3A50088ADBC /* Constants.swift in Sources */,
 				BCB306412997C34F0088ADBC /* WeatherModel.swift in Sources */,
+				F942385829E87E1B00BCDDAF /* Password.swift in Sources */,
 				BCB3063D2997C22F0088ADBC /* WeatherCoordinator.swift in Sources */,
 				BCB30661299950E10088ADBC /* DailyWeatherViewController.swift in Sources */,
 				BCCF6E8829A66E18009A6CC1 /* WeatherMapViewController.swift in Sources */,
