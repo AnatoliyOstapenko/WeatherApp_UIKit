@@ -43,9 +43,9 @@
 
 ## Pictures:
 <p align="left">	
-<img src="picFirst.png" width="260" height="480">
+<img src="picFirst.png" width="240" height="450">
 </a>
-<img src="picSecond.png" width="260" height="480">
+<img src="picSecond.png" width="240" height="450">
 </a>
-<img src="picLondon.png" width="260" height="480">
+<img src="picLondon.png" width="240" height="450">
 </p>
